@@ -1,0 +1,69 @@
+/* шрифт: Inter  */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* узнать про min-height: 100vh, почему это центр */
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 340px;
+    background: purple;
+    color: white;
+    /* height: 614px; */
+}
+
+.wrapper h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+.wrapper h2 {
+    font-size: 14px;
+    margin-top: 30px;
+    /* добавить что шрифт по жирности medium, ну или глянуть какой он там */
+}
+
+.wrapper h3 {
+    font-size: 14px;
+    margin-top: 41px;
+    /* добавить что шрифт по жирности medium, ну или глянуть какой он там */
+}
+
+.wrapper p {
+    font-size: 12px;
+    margin: 8px 0px;
+}
+
+.wrapper .input-box {
+    width: 100%;
+    height: 48px;
+    background: salmon;
+
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 48px;
+    background: blue;
+    margin-top: 30px;
+
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 1.5px solid #C7C8CA;
+    border-radius: 8px;
+}
