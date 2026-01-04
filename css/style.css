@@ -1,69 +1,200 @@
 /* шрифт: Inter  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* отредактироватть копирование font-family: inherit; и оставить только там где нужно*/
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Inter', 'Roboto', sans-serif;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* узнать поподробнее и добавить в конспект */
+    flex-direction: column;
     /* узнать про min-height: 100vh, почему это центр */
     min-height: 100vh;
+    background: #f9f9f9;
+    font-family: inherit;
+}
+
+.logo {
+    margin-bottom: 60px;
 }
 
 .wrapper {
     width: 340px;
-    background: purple;
-    color: white;
+    background: white;
     /* height: 614px; */
+    border-radius: 12px;
+    padding: 34px;
+    font-family: inherit;
 }
 
 .wrapper h1 {
     font-size: 24px;
     text-align: center;
+    color: black;
+    margin-bottom: 30px;
+    font-family: inherit;
+    font-weight: 600;
 }
 
 .wrapper h2 {
     font-size: 14px;
     margin-top: 30px;
-    /* добавить что шрифт по жирности medium, ну или глянуть какой он там */
+    color: black;
+    margin: 8px 0px;
+    font-family: inherit;
+    font-weight: 500;
 }
 
 .wrapper h3 {
     font-size: 14px;
     margin-top: 41px;
-    /* добавить что шрифт по жирности medium, ну или глянуть какой он там */
+    color: black;
+    margin: 8px 0px;
+    font-family: inherit;
+    margin-top: 30px;
+    font-weight: 500;
+    /* добавить в конспект по css таблицу соответствий типа жирности к значению*/
 }
 
 .wrapper p {
     font-size: 12px;
     margin: 8px 0px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
 }
 
 .wrapper .input-box {
     width: 100%;
     height: 48px;
-    background: salmon;
-
-}
-
-.wrapper .btn {
-    width: 100%;
-    height: 48px;
-    background: blue;
-    margin-top: 30px;
-
+    position: relative;
 }
 
 .input-box input {
     width: 100%;
     height: 100%;
     background: transparent;
+    /* узнать зачем это */
     border: none;
     outline: none;
     border: 1.5px solid #C7C8CA;
     border-radius: 8px;
+    font-size: 14px;
+    /* узнать потом почему я был не прав в первы раз при padding: 15px 15px 15px 41px
+    Типо почему всё съёхало и иконка не ставилась нормально и линки снизу тоже съёхали*/
+    padding: 15px 41px 15px 41px;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.input-box input::placeholder {
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.input-box input:hover {
+    border: 1.5px solid #CCDCF0;
+    box-shadow: 0 0 0 0.5px #CCDCF0;
+    /* Имитируем еще 0.5px толщины без смещения текста, изучить подробнее в будущем */
+}
+
+.input-box input:focus {
+    border: 1.5px solid #0FA1D7;
+    box-shadow: 0 0 0 0.5px #0FA1D7;
+    color: #0FA1D7;
+    /* чтобы стандартная синяя рамка браузера не перекрывала голубой цвет */
+    outline: none;
+}
+
+/* Состояние, когда в поле введен текст, изучить подробнее в будущем */
+.input-box input:not(:placeholder-shown) {
+    border: 1.5px solid #C7C8CA;
+    box-shadow: 0 0 0 0.5px #C7C8CA;
+    color: #000000;
+}
+
+/* узнать как это работает */
+.input-box .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.input-box .eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.wrapper .links {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 10px 0px;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.links a {
+    color: #0F2E6B;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 48px;
+    background: #0F2E6B;
+    /* узнать зачем это */
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    margin-top: 30px;
+    margin-bottom: 6px;
+    color: white;
+    /* узнать зачем это и про цвет
+    box-shadow: 0 0 10px rgb(0, 0, 0, .1);
+    */
+    box-shadow: 0 4px 10px rgba(15, 46, 107, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    /* Добавляем плавность для всех изменений */
+}
+
+/*Узнать поподробнее*/
+.btn:hover {
+    background: #0F2E6B;
+    box-shadow: 0 10px 25px rgba(15, 46, 107, 0.4);
+    /* Глубокая тень при наведении */
+    transform: translateY(-2px);
+    /* Кнопка чуть-чуть приподнимается */
+}
+
+/*Узнать поподробнее*/
+.btn:active {
+    background: #0A2355;
+    transform: translateY(0);
+    /* При клике кнопка возвращается на место */
+    box-shadow: 0 2px 5px rgba(15, 46, 107, 0.2);
+    /* Тень почти исчезает (эффект нажатия) */
 }
