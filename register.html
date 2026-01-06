@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход</title>
+    <title>Регистрация</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/auth.js" defer></script>
 </head>
@@ -22,15 +22,11 @@
     <div class="wrapper">
 
         <form id="login-form" action="" method="post">
-            <h1>Вход</h1>
+            <h1>Регистрация</h1>
             <h2 class="email-title">Почта</h2>
             <p>Вход только через корпоративную электронную почту студента.</p>
             <div class="input-box">
-                <!--мб как сделать код покрасивее и как убрать такой svg
-                Единственный нюанс на будущее: Если SVG очень большие (например, сотни строк), 
-                их иногда выносят либо в отдельный HTML-шаблон (используя <template> или скрытые блоки), 
-                либо подгружают как файлы img/icon.svg. Но для таких маленьких иконок, 
-                как у вас, хранение в константах JS — это стандартная и очень удобная практика-->
+                <!--мб как сделать код покрасивее и как убрать такой svg-->
                 <svg class="input-icon" width="21" height="18" viewBox="0 0 21 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="21" height="18" fill="url(#pattern0_527_6)" fill-opacity="0.5" />
@@ -57,11 +53,8 @@
                             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEC0lEQVR4nO2c3UtUQRiHH/ALkorKvuuqkoz+hvoXCsPMIuguU0qivOgqousor6L+g6i7ErwtTNOtqKu+vCu6iCQ/+/bE2AjbcHZ1Nz3znpn3gQFZ153fex5n9+zMOQOKoiiKoiiKshXoAPqAAeAtMA78sG3cPmZ+dwM4BmzxHTo0moBzQAFIqmwjwFn7WkqV7LQjYfY/RLhtxo6cHb6LyxN1dkRMLaMItxnJl4EG38VKpwV4WeZA/gQeAleAw/b566zEOvvzPvs785xH9m9Kvd4LYK/voqXSBkyXOHDvgB5gUxWvu9n+7ViJ1zYj8cgK1JNruoDfKQfrPXACqFmGPmqBk8CHlH5M32eWoY9gZKT9594EVq9Af2uAWyX6jF5KW8rI+Aq0Z9B3h+3LHSmtREpLymfGF+BAhhkO2j7dz5RmIqM+5WxqNmMZxVLckfLcnrVFw6WU9+92j3mOp+TpJaJv4DMpH+C+ue1kMm+n24iAPqfwj8Ba36H4e/blnhJfI3A2psxNme8ZUjiVMko2EDA9TsFj9gubFGrs9H1xxm4Cxp1CN4Kkcd7J+ISAF5fmnIlCM88kMeevopxzoS5yuaeWZtZWKo+drEeJ4OzKTI9L5aqT9ToBMuAUeQi5tDpZ+wkQdz3CLCRJZb+T1Zx5Bcdnp8j1yKXJyfqJAPnuFGkmGKXS4GT9RoC4k3fSSXKWN/gCk5zlDb7AJGd5gy8wyVne4AtMcpY3+AKTnOUNvsAkZ3mDLzDJWd7gC0xyljf4ApOc5Z2f+jDLm8NlLpKOqU0DQ/bS2MynhczlMc8EHIREaHtqVx4zwdhXGSzaClld/dgtoNgkJ60zCyHDTqf3ge1ZdCwcc9/iA+fYmLX5Fce9909voPz3MtniYzNJBrjDUvF8fFRIeVSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMKIV0mi3vyjY9WzTRoGLwCqPuaIUsht4k5Jlob0CdnnKFp2QRuB1GRnFUnyMlOiE9C5BxkK74CFfdEIKFW6gnDXRCZmuQIhZ/8+a6IRMVCDEbN+XNdEJGapASCaX4cQupLMCIac95ItOSO0SR8mgp724ohOC3eN9MSHmOT6IUghLEOILFYIKEVl4IjRXeB2WQIX46rAEKsRXhyWYFPYNndiF3Csj5K7HXNEKaU7ZpS6xj+3xmCtaIdi7t+7YCccJOzJ8yiB2IRJRIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcLI/Pi4K3W6gZnnDczcLf7MtnYqhXkZ/T6uLe5KGZba8Hdtcb3dl9Z3sYnwNpLVNrHYTYIruZMptjaa5UbKC9TZWwMGU3YqjbFN2WNh3qaqHhl/AAXE7uZCyHoBAAAAAElFTkSuQmCC" />
                     </defs>
                 </svg>
-                <input id="password" type="password" placeholder="Пароль">
-                <div class="eye-btn"> <!--Разобраться поподробнее почему div всё исправил: 
-                Почему это работает: Теперь, когда вы кликаете и JS меняет внутренний HTML (сами иконки SVG), 
-                он меняет их внутри нашего контейнера div. Сам контейнер никуда не девается, он всё так же стоит на месте. 
-                Это классическое решение для смены иконок без потери позиционирования.-->
+                <input id="password" type="password" placeholder="Придумайте пароль">
+                <div class="eye-btn">
                     <svg class="eye" width="21" height="18" viewBox="0 0 21 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="21" height="18" fill="url(#pattern0_527_29)" fill-opacity="0.6" />
@@ -75,15 +68,44 @@
                     </svg>
                 </div>
             </div>
-            <div class="links">
-                <a href="#">Забыли пароль?</a>
-                <a href="register.html">Зарегистрироваться</a>
+            <h3 class="repass-title">Повторите пароль</h3>
+            <div class="input-box">
+                <svg class="input-icon" width="21" height="18" viewBox="0 0 21 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <rect width="21" height="18" fill="url(#pattern0_527_27)" fill-opacity="0.5" />
+                    <defs>
+                        <pattern id="pattern0_527_27" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_527_27" transform="matrix(0.00857143 0 0 0.01 0.0714286 0)" />
+                        </pattern>
+                        <image id="image0_527_27" width="100" height="100" preserveAspectRatio="none"
+                            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEC0lEQVR4nO2c3UtUQRiHH/ALkorKvuuqkoz+hvoXCsPMIuguU0qivOgqousor6L+g6i7ErwtTNOtqKu+vCu6iCQ/+/bE2AjbcHZ1Nz3znpn3gQFZ153fex5n9+zMOQOKoiiKoiiKshXoAPqAAeAtMA78sG3cPmZ+dwM4BmzxHTo0moBzQAFIqmwjwFn7WkqV7LQjYfY/RLhtxo6cHb6LyxN1dkRMLaMItxnJl4EG38VKpwV4WeZA/gQeAleAw/b566zEOvvzPvs785xH9m9Kvd4LYK/voqXSBkyXOHDvgB5gUxWvu9n+7ViJ1zYj8cgK1JNruoDfKQfrPXACqFmGPmqBk8CHlH5M32eWoY9gZKT9594EVq9Af2uAWyX6jF5KW8rI+Aq0Z9B3h+3LHSmtREpLymfGF+BAhhkO2j7dz5RmIqM+5WxqNmMZxVLckfLcnrVFw6WU9+92j3mOp+TpJaJv4DMpH+C+ue1kMm+n24iAPqfwj8Ba36H4e/blnhJfI3A2psxNme8ZUjiVMko2EDA9TsFj9gubFGrs9H1xxm4Cxp1CN4Kkcd7J+ISAF5fmnIlCM88kMeevopxzoS5yuaeWZtZWKo+drEeJ4OzKTI9L5aqT9ToBMuAUeQi5tDpZ+wkQdz3CLCRJZb+T1Zx5Bcdnp8j1yKXJyfqJAPnuFGkmGKXS4GT9RoC4k3fSSXKWN/gCk5zlDb7AJGd5gy8wyVne4AtMcpY3+AKTnOUNvsAkZ3mDLzDJWd7gC0xyljf4ApOc5Z2f+jDLm8NlLpKOqU0DQ/bS2MynhczlMc8EHIREaHtqVx4zwdhXGSzaClld/dgtoNgkJ60zCyHDTqf3ge1ZdCwcc9/iA+fYmLX5Fce9909voPz3MtniYzNJBrjDUvF8fFRIeVSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMKIV0mi3vyjY9WzTRoGLwCqPuaIUsht4k5Jlob0CdnnKFp2QRuB1GRnFUnyMlOiE9C5BxkK74CFfdEIKFW6gnDXRCZmuQIhZ/8+a6IRMVCDEbN+XNdEJGapASCaX4cQupLMCIac95ItOSO0SR8mgp724ohOC3eN9MSHmOT6IUghLEOILFYIKEVl4IjRXeB2WQIX46rAEKsRXhyWYFPYNndiF3Csj5K7HXNEKaU7ZpS6xj+3xmCtaIdi7t+7YCccJOzJ8yiB2IRJRIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcLI/Pi4K3W6gZnnDczcLf7MtnYqhXkZ/T6uLe5KGZba8Hdtcb3dl9Z3sYnwNpLVNrHYTYIruZMptjaa5UbKC9TZWwMGU3YqjbFN2WNh3qaqHhl/AAXE7uZCyHoBAAAAAElFTkSuQmCC" />
+                    </defs>
+                </svg>
+                <input id="password" type="password" placeholder="Еще раз пароль">
+                <div class="eye-btn">
+                    <svg class="eye" width="21" height="18" viewBox="0 0 21 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="21" height="18" fill="url(#pattern0_527_29)" fill-opacity="0.6" />
+                        <defs>
+                            <pattern id="pattern0_527_29" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_527_29" transform="matrix(0.00857143 0 0 0.01 0.0714286 0)" />
+                            </pattern>
+                            <image id="image0_527_29" width="100" height="100" preserveAspectRatio="none"
+                                xlink:href="data:image/png;base64,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" />
+                        </defs>
+                    </svg>
+                </div>
             </div>
+            <p class="text-for-pass">Не менее 8 символов, буквы и цифры.</p>
 
             <div id="error-message" class="error-message"></div>
 
             <!--узнать почему не нужен div, а просто button-->
-            <button type="submit" class="btn">Войти</button>
+            <button type="submit" class="btn">Зарегистрироваться</button>
+            <div class="links">
+                <p>Уже есть аккаунт ?</p>
+                <a href="login.html">Войти</a>
+            </div>
 
         </form>
 

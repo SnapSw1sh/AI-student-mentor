@@ -28,10 +28,12 @@ body {
 }
 
 .wrapper {
-    width: 340px;
+    width: 408px;
     background: white;
     /* height: 614px; */
     border-radius: 12px;
+    /* узнать про padding и как от куда он берется, типо почему когда было width: 340px
+    то было неверно*/
     padding: 34px;
     font-family: inherit;
 }
@@ -45,27 +47,41 @@ body {
     font-weight: 600;
 }
 
-.wrapper h2 {
+.wrapper .email-title {
     font-size: 14px;
-    margin-top: 30px;
     color: black;
-    margin: 8px 0px;
+    margin-bottom: 8px;
     font-family: inherit;
     font-weight: 500;
 }
 
-.wrapper h3 {
+.wrapper .pass-title {
     font-size: 14px;
-    margin-top: 41px;
     color: black;
-    margin: 8px 0px;
+    margin-bottom: 8px;
     font-family: inherit;
-    margin-top: 30px;
+    margin-top: 24px;
     font-weight: 500;
     /* добавить в конспект по css таблицу соответствий типа жирности к значению*/
 }
 
+.wrapper .repass-title {
+    font-size: 14px;
+    color: black;
+    margin: 8px 0px;
+    font-family: inherit;
+    font-weight: 500;
+}
+
 .wrapper p {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.wrapper .text-for-pass {
     font-size: 12px;
     margin: 8px 0px;
     color: #C7C8CA;
@@ -89,7 +105,7 @@ body {
     border: 1.5px solid #C7C8CA;
     border-radius: 8px;
     font-size: 14px;
-    /* узнать потом почему я был не прав в первы раз при padding: 15px 15px 15px 41px
+    /* узнать потом почему я был не прав в первый раз при padding: 15px 15px 15px 41px
     Типо почему всё съёхало и иконка не ставилась нормально и линки снизу тоже съёхали*/
     padding: 15px 41px 15px 41px;
     font-family: inherit;
@@ -131,12 +147,15 @@ body {
     transform: translateY(-50%);
 }
 
-.input-box .eye {
+.input-box .eye-btn {
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wrapper .links {
@@ -144,6 +163,7 @@ body {
     justify-content: space-between;
     font-size: 12px;
     padding: 10px 0px;
+    margin-top: 8px;
     font-family: inherit;
     font-weight: normal;
 }
@@ -157,6 +177,12 @@ body {
 
 .links a:hover {
     text-decoration: underline;
+}
+
+.links p {
+    color: #000000;
+    font-family: inherit;
+    font-weight: normal;
 }
 
 .wrapper .btn {
@@ -197,4 +223,22 @@ body {
     /* При клике кнопка возвращается на место */
     box-shadow: 0 2px 5px rgba(15, 46, 107, 0.2);
     /* Тень почти исчезает (эффект нажатия) */
+}
+
+/* Стили для валидации */
+.input-box input.error {
+    border: 1.5px solid #FF383C;
+    box-shadow: 0 0 0 0.5px #FF383C;
+    color: #FF383C;
+}
+
+.error-message {
+    color: #FF383C;
+    font-size: 12px;
+    margin-top: -14px;
+    /* Немного приподнимаем к блоку с ссылками */
+    /* margin-bottom: 20px; */
+    text-align: left;
+    min-height: 14px;
+    /* Чтобы не скакало при появлении, узнать поподробнее */
 }
