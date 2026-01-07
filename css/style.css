@@ -88,11 +88,11 @@ body {
     font-weight: 600;
 }
 
-.wrapper .email-sent-title {
+.wrapper .new-pass-successful-title {
     font-size: 16px;
     text-align: center;
     color: black;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
     font-family: inherit;
     font-weight: 600;
 }
@@ -137,6 +137,16 @@ body {
     font-size: 12px;
     margin-top: 8px;
     margin-bottom: -8px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.wrapper .link-error-text {
+    width: 326px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 30px;
     color: #C7C8CA;
     font-family: inherit;
     font-weight: normal;

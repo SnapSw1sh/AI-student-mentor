@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Письмо отправлено</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/auth.js" defer></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!--succsessful-change-password-icon svg-->
+        <svg class="successful-icon" width="120" height="120" viewBox="0 0 120 120" fill="none"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g filter="url(#filter0_d_256_277)">
+                <rect x="20" y="20" width="80" height="80" rx="40" fill="#34C759" fill-opacity="0.76"
+                    shape-rendering="crispEdges" />
+                <rect x="30" y="25" width="60" height="70" fill="url(#pattern0_256_277)" />
+            </g>
+            <defs>
+                <filter id="filter0_d_256_277" x="0" y="0" width="120" height="120" filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha" />
+                    <feMorphology radius="20" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_256_277" />
+                    <feOffset />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix"
+                        values="0 0 0 0 0.203922 0 0 0 0 0.780392 0 0 0 0 0.34902 0 0 0 0.05 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_256_277" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_256_277" result="shape" />
+                </filter>
+                <pattern id="pattern0_256_277" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_256_277" transform="matrix(0.01 0 0 0.00857143 0 0.0714286)" />
+                </pattern>
+                <image id="image0_256_277" width="100" height="100" preserveAspectRatio="none"
+                    xlink:href="data:image/png;base64,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" />
+            </defs>
+        </svg>
+
+        <h1 class="new-pass-successful-title">Пароль успешно изменён</h1>
+        <a href="/login.html" class="btn">Войти</a>
+
+    </div>
+
+</body>
+
+</html>
