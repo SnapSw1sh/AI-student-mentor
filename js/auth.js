@@ -301,34 +301,32 @@ document.addEventListener('DOMContentLoaded', function () {
             const passVal = newPassInput.value.trim();
             const passConfVal = newPassConfirmInput.value.trim();
 
-            // 1. Ошибка пустого пароля
+            // Ошибка пустого пароля
             if (!passVal) {
                 showNewPassError(newPassInput, 'Введите новый пароль.');
                 return;
             }
 
-            // 2. Ошибка длины пароля
+            // Ошибка длины пароля
             if (passVal.length < 8) {
                 showNewPassError(newPassInput, 'Пароль должен содержать не менее 8 символов.');
                 return;
             }
 
-            // 3. Ошибка символов пароля (только латинские буквы и цифры)
+            // Ошибка символов пароля (только латинские буквы и цифры)
             if (!/^[a-zA-Z0-9]+$/.test(passVal)) {
                 showNewPassError(newPassInput, 'Пароль должен содержать только латинские буквы и цифры.');
                 return;
             }
 
-            // 4. Ошибка несовпадения паролей
+            // Ошибка несовпадения паролей
             if (passVal !== passConfVal) {
                 showNewPassError(newPassInput, 'Пароли не совпадают.');
                 newPassConfirmInput.classList.add('error');
                 return;
             }
 
-            console.log('New password set successfully');
-            // window.location.href = 'login.html'; // Пример редиректа
-            // Для демонстрации покажем алерт или просто оставим лог
+            window.location.href = 'new-pass-successful.html';
         });
     }
 });

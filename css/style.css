@@ -336,7 +336,52 @@ body {
     margin-top: -14px;
     /* Немного приподнимаем к блоку с ссылками */
     /* margin-bottom: 20px; */
-    text-align: left;
-    min-height: 14px;
     /* Чтобы не скакало при появлении, узнать поподробнее */
+}
+
+/* --- Адаптивность (Mobile Responsiveness) --- */
+/* Планшеты и маленькие ноутбуки */
+@media (max-width: 768px) {
+
+    /* На всякий случай, если экран уже мешьше 408px + отступы */
+    .wrapper {
+        width: 90%;
+        max-width: 408px;
+    }
+}
+
+/* Мобильные устройства */
+@media (max-width: 480px) {
+    .wrapper {
+        /* Делаем ширину резиновой, но не шире оригинала */
+        width: 90%;
+        max-width: 408px;
+        /* Уменьшаем паддинги, чтобы больше контента влезало */
+        padding: 20px;
+    }
+
+    .logo {
+        /* Уменьшаем отступ, чтобы пользователю не крутить много вниз */
+        margin-bottom: 30px;
+    }
+
+    .wrapper h1,
+    .wrapper .reg-successful-title,
+    .wrapper .new-pass-successful-title {
+        /* Чуть уменьшаем заголовок, чтобы не занимал пол экрана */
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .wrapper .successful-icon {
+        margin: 0 auto 30px auto;
+        /* Уменьшаем отступ у иконки успеха */
+    }
+
+    .wrapper .reg-successful-text,
+    .wrapper .email-sent-text,
+    .wrapper .link-error-text {
+        width: 100%;
+        /* Текст на всю ширину контейнера */
+    }
 }
