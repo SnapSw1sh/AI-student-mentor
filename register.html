@@ -21,7 +21,7 @@
 
     <div class="wrapper">
 
-        <form id="login-form" action="" method="post">
+        <form id="register-form" action="" method="post">
             <h1>Регистрация</h1>
             <h2 class="email-title">Почта</h2>
             <p>Вход только через корпоративную электронную почту студента.</p>
@@ -38,7 +38,7 @@
                             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEUElEQVR4nO2dW6gVVRjHfycveYssELqAZhIEPdUJy0KrF/XBUBDBS4aV2hV7iDjVUyBET74I3Sixhx7KoAfJCEEhL0EdvGQimRcoCApFSNS0gzsWfJsOhzWzz5m9Zu9vZv9/sF4Os9ea7/udPTNrz7qAEEIIIYQQQgghhBBCCCEccifwGLAG2NijZY3lIOSiK0wEXgYGgetAQ4WG5WLQcjOhUzIeAk45CL7hvPwKzC1bxnLgioNgGxUpVyxnpdAPXHYQZKOCUh5OLeNG4ExGg4eAN4GVwIoeLSstB4cycnTa7rvJeDXSyFVgA9CXsqGKE3LxvOVmZL42pWzop0gDz6VsoGZsiOTraKrK74pU/kOqymv8TRmM5G1misoXRSp+LUXFNef1SN4Wpqh4XaTipSkqrjnLInkLuWybFyIVL05Rcc1ZHMlbyGXbSEgxJMQZEuIMCXGGhDhDQpwhIc6QEGe4EHIfcAT4B9gBTKd+TAd2AkP2e9W9noUcHHHcfmAK9WGKxTQ8xn2ehZyLHBv+m8ZTfcZbLCPj+8uzkA8jx4ayveIvsm6wGGKxfeBZyGTgu4wT/8QCqxp9wHsZMX0PTPUsJHAzcLgmUvpyZBwDbsn5rBsh2Ai+sxmBfFQRKeOAjzNiCLHd0eLzroQEZuWMVPkKmIRfJgKfZ5z7b8CcUdThTkgrKXvt8uaNacC3bcpwK6SVlGPdHKAc4bacsVVjkeFaSFPKiYxAfwfm0X36c+57JwqMGHEtJHArcCAj4H+BAbrHxozBbc0hTzMK1OleCPbM/nVG4A3gs5zn+jII/aZtOeezG7ipYN2VEILNm8hLws/AA5TPg8DxnPPY1uYcj8oIafIKcC3nErbZBnmnJjxuv2NtxNq+ahNu2qVyQgKPAn/k/JeestHlqXjSRqJntfcn8ESitiopBOvxZt3sG1b22By+ojxu/Z68NsLP6LcnjKuyQpo943ftpU9e0sK7iKfsZtyKcMzaUcgesktY6jmBlRbS5BHgZIsEhnLB3ki+BMwH7rEy367/X9oxrer5pYzZTXUS0vy2hAlCF0eR0KIlTM17u+Tf02ojZHjv/tOcp6Ei5Zq9aEoyT6PXhDS5295EtvON+Rt4H5hN56itkCahB/808I0leDQSdtmNvZO9/54RMvLlUejNPwO8AWyxMmB/u9+O6SY9JaQKSIgzJMQZEuIMCXGGhDhDQpwhIc6QEGdIiDMkxBkS4gwJcYaEOENCekWIFjBzJkRL/BVjdSRvqyhxEcwqz6rtBF9E8javzGVi16eqvIYsiWxScD7lYspZCymHRYP1TfmfPrvnXorkaysdWmo8rG3yll0fV/RoWWU5yJoOfr7gpJ+W21RoZwTGXIbKfCrVdhWMeaTks5TMXNuspNvBNpyXMzb/pSNMsJHnP2rLI4aX65aTF1NvTzHWCTcLrCPUy5uCLUg84UcIIYQQQgghhBBCCCGEECThP/GAUfVFJW/bAAAAAElFTkSuQmCC" />
                     </defs>
                 </svg>
-                <input id="email" type="text" placeholder="name@edu.hse.ru">
+                <input id="reg-email" type="text" placeholder="name@edu.hse.ru">
             </div>
             <h3 class="pass-title">Пароль</h3>
             <div class="input-box">
@@ -53,7 +53,7 @@
                             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEC0lEQVR4nO2c3UtUQRiHH/ALkorKvuuqkoz+hvoXCsPMIuguU0qivOgqousor6L+g6i7ErwtTNOtqKu+vCu6iCQ/+/bE2AjbcHZ1Nz3znpn3gQFZ153fex5n9+zMOQOKoiiKoiiKshXoAPqAAeAtMA78sG3cPmZ+dwM4BmzxHTo0moBzQAFIqmwjwFn7WkqV7LQjYfY/RLhtxo6cHb6LyxN1dkRMLaMItxnJl4EG38VKpwV4WeZA/gQeAleAw/b566zEOvvzPvs785xH9m9Kvd4LYK/voqXSBkyXOHDvgB5gUxWvu9n+7ViJ1zYj8cgK1JNruoDfKQfrPXACqFmGPmqBk8CHlH5M32eWoY9gZKT9594EVq9Af2uAWyX6jF5KW8rI+Aq0Z9B3h+3LHSmtREpLymfGF+BAhhkO2j7dz5RmIqM+5WxqNmMZxVLckfLcnrVFw6WU9+92j3mOp+TpJaJv4DMpH+C+ue1kMm+n24iAPqfwj8Ba36H4e/blnhJfI3A2psxNme8ZUjiVMko2EDA9TsFj9gubFGrs9H1xxm4Cxp1CN4Kkcd7J+ISAF5fmnIlCM88kMeevopxzoS5yuaeWZtZWKo+drEeJ4OzKTI9L5aqT9ToBMuAUeQi5tDpZ+wkQdz3CLCRJZb+T1Zx5Bcdnp8j1yKXJyfqJAPnuFGkmGKXS4GT9RoC4k3fSSXKWN/gCk5zlDb7AJGd5gy8wyVne4AtMcpY3+AKTnOUNvsAkZ3mDLzDJWd7gC0xyljf4ApOc5Z2f+jDLm8NlLpKOqU0DQ/bS2MynhczlMc8EHIREaHtqVx4zwdhXGSzaClld/dgtoNgkJ60zCyHDTqf3ge1ZdCwcc9/iA+fYmLX5Fce9909voPz3MtniYzNJBrjDUvF8fFRIeVSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMKIV0mi3vyjY9WzTRoGLwCqPuaIUsht4k5Jlob0CdnnKFp2QRuB1GRnFUnyMlOiE9C5BxkK74CFfdEIKFW6gnDXRCZmuQIhZ/8+a6IRMVCDEbN+XNdEJGapASCaX4cQupLMCIac95ItOSO0SR8mgp724ohOC3eN9MSHmOT6IUghLEOILFYIKEVl4IjRXeB2WQIX46rAEKsRXhyWYFPYNndiF3Csj5K7HXNEKaU7ZpS6xj+3xmCtaIdi7t+7YCccJOzJ8yiB2IRJRIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcLI/Pi4K3W6gZnnDczcLf7MtnYqhXkZ/T6uLe5KGZba8Hdtcb3dl9Z3sYnwNpLVNrHYTYIruZMptjaa5UbKC9TZWwMGU3YqjbFN2WNh3qaqHhl/AAXE7uZCyHoBAAAAAElFTkSuQmCC" />
                     </defs>
                 </svg>
-                <input id="password" type="password" placeholder="Придумайте пароль">
+                <input id="reg-password" type="password" placeholder="Придумайте пароль">
                 <div class="eye-btn">
                     <svg class="eye" width="21" height="18" viewBox="0 0 21 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -81,7 +81,7 @@
                             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEC0lEQVR4nO2c3UtUQRiHH/ALkorKvuuqkoz+hvoXCsPMIuguU0qivOgqousor6L+g6i7ErwtTNOtqKu+vCu6iCQ/+/bE2AjbcHZ1Nz3znpn3gQFZ153fex5n9+zMOQOKoiiKoiiKshXoAPqAAeAtMA78sG3cPmZ+dwM4BmzxHTo0moBzQAFIqmwjwFn7WkqV7LQjYfY/RLhtxo6cHb6LyxN1dkRMLaMItxnJl4EG38VKpwV4WeZA/gQeAleAw/b566zEOvvzPvs785xH9m9Kvd4LYK/voqXSBkyXOHDvgB5gUxWvu9n+7ViJ1zYj8cgK1JNruoDfKQfrPXACqFmGPmqBk8CHlH5M32eWoY9gZKT9594EVq9Af2uAWyX6jF5KW8rI+Aq0Z9B3h+3LHSmtREpLymfGF+BAhhkO2j7dz5RmIqM+5WxqNmMZxVLckfLcnrVFw6WU9+92j3mOp+TpJaJv4DMpH+C+ue1kMm+n24iAPqfwj8Ba36H4e/blnhJfI3A2psxNme8ZUjiVMko2EDA9TsFj9gubFGrs9H1xxm4Cxp1CN4Kkcd7J+ISAF5fmnIlCM88kMeevopxzoS5yuaeWZtZWKo+drEeJ4OzKTI9L5aqT9ToBMuAUeQi5tDpZ+wkQdz3CLCRJZb+T1Zx5Bcdnp8j1yKXJyfqJAPnuFGkmGKXS4GT9RoC4k3fSSXKWN/gCk5zlDb7AJGd5gy8wyVne4AtMcpY3+AKTnOUNvsAkZ3mDLzDJWd7gC0xyljf4ApOc5Z2f+jDLm8NlLpKOqU0DQ/bS2MynhczlMc8EHIREaHtqVx4zwdhXGSzaClld/dgtoNgkJ60zCyHDTqf3ge1ZdCwcc9/iA+fYmLX5Fce9909voPz3MtniYzNJBrjDUvF8fFRIeVSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMKIV0mi3vyjY9WzTRoGLwCqPuaIUsht4k5Jlob0CdnnKFp2QRuB1GRnFUnyMlOiE9C5BxkK74CFfdEIKFW6gnDXRCZmuQIhZ/8+a6IRMVCDEbN+XNdEJGapASCaX4cQupLMCIac95ItOSO0SR8mgp724ohOC3eN9MSHmOT6IUghLEOILFYIKEVl4IjRXeB2WQIX46rAEKsRXhyWYFPYNndiF3Csj5K7HXNEKaU7ZpS6xj+3xmCtaIdi7t+7YCccJOzJ8yiB2IRJRIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcLI/Pi4K3W6gZnnDczcLf7MtnYqhXkZ/T6uLe5KGZba8Hdtcb3dl9Z3sYnwNpLVNrHYTYIruZMptjaa5UbKC9TZWwMGU3YqjbFN2WNh3qaqHhl/AAXE7uZCyHoBAAAAAElFTkSuQmCC" />
                     </defs>
                 </svg>
-                <input id="password" type="password" placeholder="Еще раз пароль">
+                <input id="reg-password-confirm" type="password" placeholder="Еще раз пароль">
                 <div class="eye-btn">
                     <svg class="eye" width="21" height="18" viewBox="0 0 21 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

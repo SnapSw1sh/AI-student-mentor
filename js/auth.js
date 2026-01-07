@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </defs>
                 </svg>`;
 
-    // --- Password Toggle Functionality ---
+    // --- Переключение глаз ---
     if (eyeIcon) {
         eyeIcon.addEventListener('click', function () {
             // Переключаем тип инпута
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- Form Validation ---
+    // --- Логика авторизации ---
     if (loginForm) {
         loginForm.addEventListener('submit', function (e) {
             e.preventDefault(); // Предотвращаем стандартную отправку формы
@@ -89,6 +89,104 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Очистка ошибок при вводе
-    emailInput.addEventListener('input', clearError);
-    passwordInput.addEventListener('input', clearError);
+    if (emailInput) emailInput.addEventListener('input', clearError);
+    if (passwordInput) passwordInput.addEventListener('input', clearError);
+
+    // --- Логика РЕГИСТРАЦИИ ---
+    const registerForm = document.getElementById('register-form');
+    const regEmailInput = document.getElementById('reg-email');
+    const regPassInput = document.getElementById('reg-password');
+    const regPassConfirmInput = document.getElementById('reg-password-confirm');
+    // Находим все кнопки-"глаза" внутри input-box на странице регистрации
+    // (их там может быть две: для пароля и подтверждения)
+    const regEyeBtns = document.querySelectorAll('#register-form .input-box .eye-btn'); // querySelectorAll - возвращает все найденные элементы
+
+    // 1. Пароль Toggle для регистрации (работает с несколькими глазами)
+    if (regEyeBtns.length > 0) {
+        regEyeBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Находим input, который лежит в том же родителе (.input-box), перед кнопкой
+                const input = btn.previousElementSibling;
+                if (input && input.tagName === 'INPUT') {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+
+                    if (type === 'text') {
+                        btn.innerHTML = SVG_OPEN_EYE;
+                    } else {
+                        btn.innerHTML = SVG_CLOSED_EYE;
+                    }
+                }
+            });
+        });
+    }
+
+    // Форма регистрации
+    if (registerForm) {
+        // Функция для отображения ошибки на конкретном поле
+        function showRegError(input, msg) {
+            input.classList.add('error');
+            errorMessage.textContent = msg;
+            errorMessage.style.marginTop = '-7px';
+        }
+
+        // Функция для очистки ошибок
+        function clearRegError(e) {
+            e.target.classList.remove('error');
+            // Если ошибок больше нет нигде, можно убрать текст
+            const hasErrors = registerForm.querySelectorAll('.input-box input.error').length > 0;
+            if (!hasErrors) {
+                errorMessage.textContent = '';
+            }
+        }
+
+        [regEmailInput, regPassInput, regPassConfirmInput].forEach(inp => {
+            if (inp) inp.addEventListener('input', clearRegError);
+        });
+
+        registerForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Сброс визуальных ошибок
+            [regEmailInput, regPassInput, regPassConfirmInput].forEach(inp => inp.classList.remove('error'));
+            errorMessage.textContent = '';
+
+            const emailVal = regEmailInput.value.trim();
+            const passVal = regPassInput.value.trim();
+            const passConfVal = regPassConfirmInput.value.trim();
+
+            // 1. Ошибка формата почты
+            if (!emailVal || !emailVal.endsWith('@edu.hse.ru')) {
+                showRegError(regEmailInput, 'Неверная почта для регистрации. Используйте @edu.hse.ru');
+                return;
+            }
+            // 2. Ошибка сущ. пользователя (Для примера, в будущем будет проверка на наличие пользователя в БД)
+            if (emailVal === 'ivan@edu.hse.ru') {
+                showRegError(regEmailInput, 'Пользователь с такой почтой уже зарегистрирован.');
+                return;
+            }
+
+            // 3. Ошибка длины пароля
+            if (passVal.length < 8) {
+                showRegError(regPassInput, 'Пароль должен содержать не менее 8 символов.');
+                return;
+            }
+
+            // 4. Ошибка символов пароля (только латинские буквы и цифры)
+            if (!/^[a-zA-Z0-9]+$/.test(passVal)) {
+                showRegError(regPassInput, 'Пароль должен содержать только латинские буквы и цифры.');
+                return;
+            }
+
+            // 5. Ошибка несовпадения паролей
+            if (passVal !== passConfVal) {
+                showRegError(regPassInput, 'Пароли не совпадают.');
+                regPassConfirmInput.classList.add('error');
+                return;
+            }
+
+            console.log('Registration success');
+            window.location.href = 'register-successful.html';
+        });
+    }
 });

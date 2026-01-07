@@ -27,6 +27,7 @@ body {
     margin-bottom: 60px;
 }
 
+
 .wrapper {
     width: 408px;
     background: white;
@@ -36,6 +37,11 @@ body {
     то было неверно*/
     padding: 34px;
     font-family: inherit;
+}
+
+.wrapper .successful-icon {
+    display: block;
+    margin: 0 auto 60px auto;
 }
 
 .wrapper h1 {
@@ -73,6 +79,15 @@ body {
     font-weight: 500;
 }
 
+.wrapper .reg-successful-title {
+    font-size: 16px;
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+    font-family: inherit;
+    font-weight: 600;
+}
+
 .wrapper p {
     font-size: 12px;
     margin-bottom: 8px;
@@ -81,9 +96,20 @@ body {
     font-weight: normal;
 }
 
+.wrapper .reg-successful-text {
+    width: 314px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 30px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
 .wrapper .text-for-pass {
     font-size: 12px;
     margin: 8px 0px;
+    padding: 5px 0px;
     color: #C7C8CA;
     font-family: inherit;
     font-weight: normal;
@@ -204,7 +230,11 @@ body {
     font-size: 16px;
     font-family: inherit;
     transition: all 0.3s ease;
-    /* Добавляем плавность для всех изменений */
+    /* Добавляем плавность для всех изменений, изучить подробнее потом */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 /*Узнать поподробнее*/
