@@ -88,6 +88,15 @@ body {
     font-weight: 600;
 }
 
+.wrapper .email-sent-title {
+    font-size: 16px;
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+    font-family: inherit;
+    font-weight: 600;
+}
+
 .wrapper p {
     font-size: 12px;
     margin-bottom: 8px;
@@ -101,6 +110,33 @@ body {
     text-align: center;
     font-size: 12px;
     margin-bottom: 30px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.wrapper .reset-password-text {
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.wrapper .email-sent-text {
+    font-size: 12px;
+    width: 336px;
+    text-align: justify;
+    margin-bottom: 20px;
+    color: #C7C8CA;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.wrapper .new-password-text {
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: -8px;
     color: #C7C8CA;
     font-family: inherit;
     font-weight: normal;
@@ -194,6 +230,17 @@ body {
     font-weight: normal;
 }
 
+/*Потом подумать об оптимизации кода, а то дублирование бесит */
+.wrapper .link {
+    display: flex;
+    justify-content: right;
+    font-size: 12px;
+    padding: 11.5px 0px;
+    margin-top: -6px;
+    font-family: inherit;
+    font-weight: normal;
+}
+
 .links a {
     color: #0F2E6B;
     text-decoration: none;
@@ -209,6 +256,17 @@ body {
     color: #000000;
     font-family: inherit;
     font-weight: normal;
+}
+
+.link a {
+    color: #0F2E6B;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+.link a:hover {
+    text-decoration: underline;
 }
 
 .wrapper .btn {

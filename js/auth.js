@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function clearError() {
         // Убираем класс ошибки
         emailInput.classList.remove('error');
-        passwordInput.classList.remove('error');
+        if (passwordInput) passwordInput.classList.remove('error');
         // Очищаем текст
         errorMessage.textContent = '';
     }
@@ -155,30 +155,30 @@ document.addEventListener('DOMContentLoaded', function () {
             const passVal = regPassInput.value.trim();
             const passConfVal = regPassConfirmInput.value.trim();
 
-            // 1. Ошибка формата почты
+            // Ошибка формата почты
             if (!emailVal || !emailVal.endsWith('@edu.hse.ru')) {
                 showRegError(regEmailInput, 'Неверная почта для регистрации. Используйте @edu.hse.ru');
                 return;
             }
-            // 2. Ошибка сущ. пользователя (Для примера, в будущем будет проверка на наличие пользователя в БД)
+            // Ошибка сущ. пользователя (Для примера, в будущем будет проверка на наличие пользователя в БД)
             if (emailVal === 'ivan@edu.hse.ru') {
                 showRegError(regEmailInput, 'Пользователь с такой почтой уже зарегистрирован.');
                 return;
             }
 
-            // 3. Ошибка длины пароля
+            // Ошибка длины пароля
             if (passVal.length < 8) {
                 showRegError(regPassInput, 'Пароль должен содержать не менее 8 символов.');
                 return;
             }
 
-            // 4. Ошибка символов пароля (только латинские буквы и цифры)
+            // Ошибка символов пароля (только латинские буквы и цифры)
             if (!/^[a-zA-Z0-9]+$/.test(passVal)) {
                 showRegError(regPassInput, 'Пароль должен содержать только латинские буквы и цифры.');
                 return;
             }
 
-            // 5. Ошибка несовпадения паролей
+            // Ошибка несовпадения паролей
             if (passVal !== passConfVal) {
                 showRegError(regPassInput, 'Пароли не совпадают.');
                 regPassConfirmInput.classList.add('error');
@@ -187,6 +187,148 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log('Registration success');
             window.location.href = 'register-successful.html';
+        });
+    }
+
+    // --- Логика СБРОСА ПАРОЛЯ ---
+    const resetForm = document.getElementById('reset-form');
+    const resetEmailInput = document.getElementById('email');
+
+    if (resetForm) {
+        // Функция для отображения ошибки на конкретном поле
+        function showResetError(input, msg) {
+            input.classList.add('error');
+            const errMsg = document.getElementById('error-message');
+            if (errMsg) {
+                errMsg.textContent = msg;
+                errMsg.style.marginTop = '7px';
+            }
+        }
+
+        function clearResetError(e) {
+            e.target.classList.remove('error');
+            const errMsg = document.getElementById('error-message');
+            if (errMsg) errMsg.textContent = '';
+        }
+
+        if (resetEmailInput) {
+            resetEmailInput.addEventListener('input', clearResetError);
+        }
+
+        resetForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Очистка ошибок
+            if (resetEmailInput) resetEmailInput.classList.remove('error');
+            const errMsg = document.getElementById('error-message');
+            if (errMsg) errMsg.textContent = '';
+
+            const emailVal = resetEmailInput.value.trim();
+
+            // Ошибка формата почты
+            if (!emailVal || !emailVal.endsWith('@edu.hse.ru')) {
+                showResetError(resetEmailInput, 'Неверная почта. Используйте @edu.hse.ru');
+                return;
+            }
+
+            // Ошибка несущ. пользователя (Для примера, в будущем будет проверка на наличие пользователя в БД)
+            if (emailVal === 'ivan@edu.hse.ru') {
+                showResetError(resetEmailInput, 'Пользователь с такой почтой не зарегистрирован.');
+                return;
+            }
+
+            window.location.href = 'email-sent.html';
+        });
+    }
+
+    // --- Логика НОВОГО ПАРОЛЯ ---
+    const newPassForm = document.getElementById('new-password-form');
+    const newPassInput = document.getElementById('new-password');
+    const newPassConfirmInput = document.getElementById('new-password-confirm');
+    const newPassEyeBtns = document.querySelectorAll('#new-password-form .input-box .eye-btn');
+
+    // 1. Пароль Toggle для нового пароля
+    if (newPassEyeBtns.length > 0) {
+        newPassEyeBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const input = btn.previousElementSibling;
+                if (input && input.tagName === 'INPUT') {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+
+                    if (type === 'text') {
+                        btn.innerHTML = SVG_OPEN_EYE;
+                    } else {
+                        btn.innerHTML = SVG_CLOSED_EYE;
+                    }
+                }
+            });
+        });
+    }
+
+    if (newPassForm) {
+        function showNewPassError(input, msg) {
+            input.classList.add('error');
+            const errMsg = document.getElementById('error-message');
+            if (errMsg) {
+                errMsg.textContent = msg;
+                errMsg.style.marginTop = '7px';
+            }
+        }
+
+        function clearNewPassError(e) {
+            e.target.classList.remove('error');
+            // Если ошибок больше нет нигде, можно убрать текст
+            const hasErrors = newPassForm.querySelectorAll('.input-box input.error').length > 0;
+            const errMsg = document.getElementById('error-message');
+            if (!hasErrors && errMsg) {
+                errMsg.textContent = '';
+            }
+        }
+
+        [newPassInput, newPassConfirmInput].forEach(inp => {
+            if (inp) inp.addEventListener('input', clearNewPassError);
+        });
+
+        newPassForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Сброс визуальных ошибок
+            [newPassInput, newPassConfirmInput].forEach(inp => inp.classList.remove('error'));
+            const errMsg = document.getElementById('error-message');
+            if (errMsg) errMsg.textContent = '';
+
+            const passVal = newPassInput.value.trim();
+            const passConfVal = newPassConfirmInput.value.trim();
+
+            // 1. Ошибка пустого пароля
+            if (!passVal) {
+                showNewPassError(newPassInput, 'Введите новый пароль.');
+                return;
+            }
+
+            // 2. Ошибка длины пароля
+            if (passVal.length < 8) {
+                showNewPassError(newPassInput, 'Пароль должен содержать не менее 8 символов.');
+                return;
+            }
+
+            // 3. Ошибка символов пароля (только латинские буквы и цифры)
+            if (!/^[a-zA-Z0-9]+$/.test(passVal)) {
+                showNewPassError(newPassInput, 'Пароль должен содержать только латинские буквы и цифры.');
+                return;
+            }
+
+            // 4. Ошибка несовпадения паролей
+            if (passVal !== passConfVal) {
+                showNewPassError(newPassInput, 'Пароли не совпадают.');
+                newPassConfirmInput.classList.add('error');
+                return;
+            }
+
+            console.log('New password set successfully');
+            // window.location.href = 'login.html'; // Пример редиректа
+            // Для демонстрации покажем алерт или просто оставим лог
         });
     }
 });
