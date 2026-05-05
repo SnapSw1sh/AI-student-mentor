@@ -1,0 +1,30 @@
+const PNG_DATA_URI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEC0lEQVR4nO2c3UtUQRiHH/ALkorKvuuqkoz+hvoXCsPMIuguU0qivOgqousor6L+g6i7ErwtTNOtqKu+vCu6iCQ/+/bE2AjbcHZ1Nz3znpn3gQFZ153fex5n9+zMOQOKoiiKoiiKshXoAPqAAeAtMA78sG3cPmZ+dwM4BmzxHTo0moBzQAFIqmwjwFn7WkqV7LQjYfY/RLhtxo6cHb6LyxN1dkRMLaMItxnJl4EG38VKpwV4WeZA/gQeAleAw/b566zEOvvzPvs785xH9m9Kvd4LYK/voqXSBkyXOHDvgB5gUxWvu9n+7ViJ1zYj8cgK1JNruoDfKQfrPXACqFmGPmqBk8CHlH5M32eWoY9gZKT9594EVq9Af2uAWyX6jF5KW8rI+Aq0Z9B3h+3LHSmtREpLymfGF+BAhhkO2j7dz5RmIqM+5WxqNmMZxVLckfLcnrVFw6WU9+92j3mOp+TpJaJv4DMpH+C+ue1kMm+n24iAPqfwj8Ba36H4e/blnhJfI3A2psxNme8ZUjiVMko2EDA9TsFj9gubFGrs9H1xxm4Cxp1CN4Kkcd7J+ISAF5fmnIlCM88kMeevopxzoS5yuaeWZtZWKo+drEeJ4OzKTI9L5aqT9ToBMuAUeQi5tDpZ+wkQdz3CLCRJZb+T1Zx5Bcdnp8j1yKXJyfqJAPnuFGkmGKXS4GT9RoC4k3fSSXKWN/gCk5zlDb7AJGd5gy8wyVne4AtMcpY3+AKTnOUNvsAkZ3mDLzDJWd7gC0xyljf4ApOc5Z2f+jDLm8NlLpKOqU0DQ/bS2MynhczlMc8EHIREaHtqVx4zwdhXGSzaClld/dgtoNgkJ60zCyHDTqf3ge1ZdCwcc9/iA+fYmLX5Fce9909voPz3MtniYzNJBrjDUvF8fFRIeVSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMFSIMKIV0mi3vyjY9WzTRoGLwCqPuaIUsht4k5Jlob0CdnnKFp2QRuB1GRnFUnyMlOiE9C5BxkK74CFfdEIKFW6gnDXRCZmuQIhZ/8+a6IRMVCDEbN+XNdEJGapASCaX4cQupLMCIac95ItOSO0SR8mgp724ohOC3eN9MSHmOT6IUghLEOILFYIKEVl4IjRXeB2WQIX46rAEKsRXhyWYFPYNndiF3Csj5K7HXNEKaU7ZpS6xj+3xmCtaIdi7t+7YCccJOzJ8yiB2IRJRIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcJQIcLI/Pi4K3W6gZnnDczcLf7MtnYqhXkZ/T6uLe5KGZba8Hdtcb3dl9Z3sYnwNpLVNrHYTYIruZMptjaa5UbKC9TZWwMGU3YqjbFN2WNh3qaqHhl/AAXE7uZCyHoBAAAAAElFTkSuQmCC';
+
+export function PasswordIcon({ className }) {
+  return (
+    <svg
+      className={className}
+      width="21"
+      height="18"
+      viewBox="0 0 21 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      aria-hidden="true"
+    >
+      <rect width="21" height="18" fill="url(#pattern_password)" fillOpacity="0.5" />
+      <defs>
+        <pattern id="pattern_password" patternContentUnits="objectBoundingBox" width="1" height="1">
+          <use xlinkHref="#image_pattern_password" transform="matrix(0.00857143 0 0 0.01 0.0714286 0)" />
+        </pattern>
+        <image
+          id="image_pattern_password"
+          width="100"
+          height="100"
+          preserveAspectRatio="none"
+          xlinkHref={PNG_DATA_URI}
+        />
+      </defs>
+    </svg>
+  );
+}

@@ -1,0 +1,27 @@
+:root {
+  --color-primary: #0F2E6B;
+  --color-primary-pressed: #0A2355;
+  --color-text: #000000;
+  --color-text-muted: #C7C8CA;
+  --color-border-hover: #CCDCF0;
+  --color-focus: #0FA1D7;
+  --color-error: #FF383C;
+  --color-success: #34C759;
+  --color-bg: #f9f9f9;
+  --color-surface: #FFFFFF;
+  --color-secondary: #CBDDED;
+  --color-muted-2: #969798;
+  --color-input-bg: #F6F6F6;
+
+  --font-primary: 'Inter', 'Roboto', sans-serif;
+
+  --wrapper-width: 408px;
+  --wrapper-radius: 12px;
+  --wrapper-padding: 34px;
+  --input-height: 48px;
+  --btn-height: 48px;
+  --input-radius: 8px;
+
+  --bp-tablet: 768px;
+  --bp-mobile: 480px;
+}
