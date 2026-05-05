@@ -18,7 +18,10 @@ const GROUP_OPTIONS = ['1', '2', '3', '4', '5', '6'];
 
 function EditableField({ id, value, placeholder, onChange, error, type = 'text' }) {
   return (
-    <div className={`${styles.field} ${error ? styles.fieldError : ''}`.trim()}>
+    <label
+      htmlFor={id}
+      className={`${styles.field} ${error ? styles.fieldError : ''}`.trim()}
+    >
       <input
         id={id}
         type={type}
@@ -28,7 +31,7 @@ function EditableField({ id, value, placeholder, onChange, error, type = 'text' 
         className={styles.fieldInput}
       />
       <EditPencilIcon className={styles.fieldIcon} />
-    </div>
+    </label>
   );
 }
 
@@ -42,7 +45,8 @@ function ReadonlyField({ value, full }) {
 
 function SelectField({ id, value, placeholder, onChange, options, error, full }) {
   return (
-    <div
+    <label
+      htmlFor={id}
       className={`${styles.field} ${full ? styles.fieldFull : ''} ${error ? styles.fieldError : ''}`.trim()}
     >
       <select
@@ -61,7 +65,7 @@ function SelectField({ id, value, placeholder, onChange, options, error, full })
         ))}
       </select>
       <ChevronDownIcon className={styles.fieldIcon} />
-    </div>
+    </label>
   );
 }
 

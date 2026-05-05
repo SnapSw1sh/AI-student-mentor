@@ -19,6 +19,7 @@
 }
 
 .avatar {
+  position: relative;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -27,11 +28,39 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: filter 0.2s ease;
+}
+
+.avatar:hover {
+  filter: brightness(0.96);
 }
 
 .avatarIcon {
   width: 100%;
   height: 100%;
+}
+
+.avatarImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.fileInput {
+  display: none;
+}
+
+.avatarError {
+  color: var(--color-error);
+  font-size: 12px;
+  text-align: center;
+  max-width: 180px;
 }
 
 .name {
