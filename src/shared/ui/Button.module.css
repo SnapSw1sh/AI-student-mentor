@@ -1,0 +1,37 @@
+.btn {
+  width: 100%;
+  height: var(--btn-height);
+  background: var(--color-primary);
+  border: none;
+  outline: none;
+  border-radius: var(--input-radius);
+  margin-top: 30px;
+  margin-bottom: 6px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(15, 46, 107, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  box-shadow: 0 10px 25px rgba(15, 46, 107, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+  background: var(--color-primary-pressed);
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(15, 46, 107, 0.2);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}

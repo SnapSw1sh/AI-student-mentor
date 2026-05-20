@@ -1,0 +1,46 @@
+.icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.titleSuccess {
+  font-size: 16px;
+  text-align: center;
+  color: black;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.titleNewPass {
+  font-size: 16px;
+  text-align: center;
+  color: black;
+  margin-bottom: 45px;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .titleSuccess,
+  .titleNewPass {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}
+
+.text {
+  text-align: center;
+  font-size: 12px;
+  margin: 0 auto 30px auto;
+  max-width: 326px;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 480px) {
+  .icon {
+    margin-bottom: 30px;
+  }
+  .text {
+    max-width: 100%;
+  }
+}

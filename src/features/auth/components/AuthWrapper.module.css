@@ -1,0 +1,22 @@
+.wrapper {
+  width: var(--wrapper-width);
+  background: var(--color-surface);
+  border-radius: var(--wrapper-radius);
+  padding: var(--wrapper-padding);
+  font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 90%;
+    max-width: var(--wrapper-width);
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    width: 90%;
+    max-width: var(--wrapper-width);
+    padding: 20px;
+  }
+}

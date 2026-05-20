@@ -1,0 +1,57 @@
+.form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  color: #010104;
+  padding: 4px 0;
+  resize: none;
+  max-height: 120px;
+  line-height: 1.4;
+}
+
+.input::placeholder {
+  color: #939598;
+}
+
+.sendButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  background: rgba(15, 46, 107, 0.08);
+}
+
+.sendButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sendIcon {
+  width: 29px;
+  height: 31px;
+}
