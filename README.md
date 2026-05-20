@@ -12,6 +12,22 @@
 - React Context для аутентификации
 - Нативный `fetch` + `WebSocket`
 
+## Требования
+
+Перед началом работы установить:
+
+1. **Node.js 20+(рек.: 24.15)** — [nodejs.org](https://nodejs.org) (выбрать LTS). Проверка: `node -v`
+2. **pnpm 11+** — после установки Node.js выполнить терминале (PowerShell или CMD):
+   ```bash
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser # эта настройка необходима для установки pnpm без npm, 
+                                                                        # можете сами почитать про неё
+   corepack enable
+   corepack prepare pnpm@11.0.0 --activate
+   ```
+   Проверка: `pnpm -v`
+3. **Docker Desktop** — нужен только для запуска бэкенда. [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop). Проверка: `docker -v`
+4. **Git** — [git-scm.com](https://git-scm.com). Проверка: `git -v`
+
 ## Команды
 
 ```bash
@@ -24,20 +40,28 @@ pnpm run lint      # ESLint
 
 ## Запуск локально (фронт + бэк)
 
-1. Поднять бэк (nginx на `:80` + микросервисы) — из папки с бэкенд-репозиторием:
+1. Склонировать этот репозиторий и перейти в папку проекта.
+
+2. Поднять бэк — из папки с бэкенд-репозиторием:
    ```bash
    docker compose up -d
    ```
+   Nginx поднимается на `:80`. Проверка: `curl http://localhost/ping` → `pong`.
 
-2. Запустить фронт:
+3. Запустить фронт:
    ```bash
    pnpm install
    pnpm run dev
    ```
 
-3. Открыть `http://localhost:5173`. Vite проксирует `/api/*` и `/ws` к nginx на `:80`.
+4. Открыть `http://localhost:5173`. Vite проксирует `/api/*` и `/ws` к nginx на `:80`.
 
-Проверка, что бэк живой: `curl http://localhost/ping` → `pong`.
+**Полезные команды Docker:**
+```bash
+docker compose down     # остановить, данные сохранятся
+docker compose down -v  # остановить и удалить все данные локально (БД, MinIO и т.д.)
+docker compose logs auth-svc  # посмотреть логи (например, ссылки верификации email)
+```
 
 ## Тестовый аккаунт
 
