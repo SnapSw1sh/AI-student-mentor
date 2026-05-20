@@ -11,3 +11,4 @@ export { ChevronDownIcon } from './ChevronDownIcon';
 export { AvatarPlaceholderIcon } from './AvatarPlaceholderIcon';
 export { SidebarUserIcon } from './SidebarUserIcon';
 export { LogoutIcon } from './LogoutIcon';
+export { SendIcon } from './SendIcon';

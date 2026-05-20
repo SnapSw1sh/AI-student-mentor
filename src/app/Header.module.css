@@ -32,18 +32,20 @@
   font-weight: 500;
   font-size: 16px;
   white-space: nowrap;
-  transition: opacity 0.2s ease;
   text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .navLink:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-.navLinkActive {
+.navLinkActive,
+.navLinkActive:hover {
+  background: #0A2355;
   opacity: 1;
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 .avatar {

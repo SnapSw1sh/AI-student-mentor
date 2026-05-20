@@ -119,7 +119,7 @@ export function AuthProvider({ children }) {
       email: 'admin@edu.hse.ru',
       first_name: 'Тестовый',
       last_name: 'Пользователь',
-      year: 2025,
+      year: 2026,
       group_name: '5',
       role: 'student',
     });

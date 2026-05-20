@@ -10,6 +10,7 @@ import { LinkErrorPage } from '../features/auth/pages/LinkErrorPage';
 import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
+import { ChatPage } from '../features/chat/pages/ChatPage';
 import { AppLayout } from './AppLayout';
 import styles from './Placeholder.module.css';
 
@@ -37,15 +38,7 @@ export function AppRoutes() {
 
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
-          <Route
-            path="/"
-            element={
-              <Placeholder
-                title="ИИ-помощник студента"
-                text="Чат с ИИ-помощником появится на Этапе 3."
-              />
-            }
-          />
+          <Route path="/" element={<ChatPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/library"
