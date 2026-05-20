@@ -7,7 +7,7 @@ export const authApi = {
   login: (email, password) =>
     httpClient.post('/auth/login', { email, password }),
 
-  refresh: () => httpClient.post('/auth/refresh'),
+  refresh: () => httpClient.post('/auth/refresh', undefined, { _retry: true }),
 
   logout: () => httpClient.post('/auth/logout'),
 

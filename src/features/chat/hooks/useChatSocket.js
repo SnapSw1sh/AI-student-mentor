@@ -5,6 +5,7 @@ import { useAuth } from '../../auth/hooks/useAuth';
 const PING_INTERVAL_MS = 30_000;
 const RECONNECT_DELAY_MS = 2_000;
 const MAX_RECONNECT_ATTEMPTS = 3;
+const STREAM_INACTIVITY_TIMEOUT_MS = 6_000;
 
 const generateRequestId = () =>
   globalThis.crypto?.randomUUID?.() ??
@@ -17,6 +18,7 @@ export function useChatSocket() {
   const reconnectTimerRef = useRef(null);
   const closedByUserRef = useRef(false);
   const reconnectAttemptsRef = useRef(0);
+  const streamWatchdogRef = useRef(null);
 
   const [status, setStatus] = useState('idle'); // idle | connecting | connected | error | closed
   const [messages, setMessages] = useState([]);
@@ -29,6 +31,25 @@ export function useChatSocket() {
     socket.send(JSON.stringify(payload));
     return true;
   }, []);
+
+  const clearStreamWatchdog = useCallback(() => {
+    if (streamWatchdogRef.current) {
+      clearTimeout(streamWatchdogRef.current);
+      streamWatchdogRef.current = null;
+    }
+  }, []);
+
+  const armStreamWatchdog = useCallback((assistantMessageId) => {
+    clearStreamWatchdog();
+    streamWatchdogRef.current = setTimeout(() => {
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === assistantMessageId ? { ...m, streaming: false } : m,
+        ),
+      );
+      setStreamingId(null);
+    }, STREAM_INACTIVITY_TIMEOUT_MS);
+  }, [clearStreamWatchdog]);
 
   const handleFrame = useCallback((frame) => {
     switch (frame.type) {
@@ -64,6 +85,7 @@ export function useChatSocket() {
           }),
         );
         setStreamingId(frame.assistant_message_id);
+        armStreamWatchdog(frame.assistant_message_id);
         return;
       }
 
@@ -75,10 +97,12 @@ export function useChatSocket() {
               : m,
           ),
         );
+        armStreamWatchdog(frame.assistant_message_id);
         return;
       }
 
       case 'message_completed': {
+        clearStreamWatchdog();
         setMessages((prev) =>
           prev.map((m) =>
             m.id === frame.assistant_message_id ? { ...m, streaming: false } : m,
@@ -90,6 +114,7 @@ export function useChatSocket() {
 
       case 'message_error':
       case 'error': {
+        clearStreamWatchdog();
         setError(frame.message || 'Произошла ошибка при обработке запроса.');
         setMessages((prev) =>
           prev.map((m) => (m.streaming ? { ...m, streaming: false } : m)),
@@ -111,7 +136,7 @@ export function useChatSocket() {
       default:
         return;
     }
-  }, [sendFrame]);
+  }, [sendFrame, armStreamWatchdog, clearStreamWatchdog]);
 
   const cleanupTimers = useCallback(() => {
     if (pingTimerRef.current) {
@@ -140,6 +165,10 @@ export function useChatSocket() {
       socketRef.current = socket;
 
       socket.addEventListener('open', () => {
+        if (socketRef.current !== socket) {
+          socket.close();
+          return;
+        }
         setStatus('connected');
         reconnectAttemptsRef.current = 0;
         pingTimerRef.current = setInterval(() => {
@@ -148,6 +177,7 @@ export function useChatSocket() {
       });
 
       socket.addEventListener('message', (event) => {
+        if (socketRef.current !== socket) return;
         let frame;
         try {
           frame = JSON.parse(event.data);
@@ -158,10 +188,12 @@ export function useChatSocket() {
       });
 
       socket.addEventListener('error', () => {
+        if (socketRef.current !== socket) return;
         setStatus('error');
       });
 
       socket.addEventListener('close', () => {
+        if (socketRef.current !== socket) return;
         cleanupTimers();
         socketRef.current = null;
         setStatus('closed');
@@ -180,13 +212,18 @@ export function useChatSocket() {
     return () => {
       closedByUserRef.current = true;
       cleanupTimers();
+      clearStreamWatchdog();
       const socket = socketRef.current;
-      if (socket && socket.readyState === WebSocket.OPEN) {
+      if (
+        socket &&
+        (socket.readyState === WebSocket.CONNECTING ||
+          socket.readyState === WebSocket.OPEN)
+      ) {
         socket.close();
       }
       socketRef.current = null;
     };
-  }, [accessToken, isAuthenticated, cleanupTimers, handleFrame, sendFrame]);
+  }, [accessToken, isAuthenticated, cleanupTimers, clearStreamWatchdog, handleFrame, sendFrame]);
 
   const sendQuestion = useCallback(
     (content) => {
