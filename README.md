@@ -7,7 +7,7 @@
 ## Стек
 
 - React 19 + Vite 8
-- React Router v6
+- React Router v7
 - CSS Modules + CSS-переменные
 - React Context для аутентификации
 - Нативный `fetch` + `WebSocket`
@@ -40,21 +40,23 @@ pnpm run lint      # ESLint
 
 ## Запуск локально (фронт + бэк)
 
-1. Склонировать этот репозиторий и перейти в папку проекта.
+Бэкенд (`backend-con/`) лежит прямо в этом репозитории — read-only, туда ничего не пишем, используем только как API-контракт (см. [CLAUDE.md](CLAUDE.md), [docs/API.md](docs/API.md)).
 
-2. Поднять бэк — из папки с бэкенд-репозиторием:
+1. Поднять бэк:
    ```bash
+   cd backend-con/pochemuchnic-miem-prj
+   cp .env.example .env   # если .env ещё нет — там уже подставлены рабочие дефолты
    docker compose up -d
    ```
    Nginx поднимается на `:80`. Проверка: `curl http://localhost/ping` → `pong`.
 
-3. Запустить фронт:
+2. Запустить фронт (из корня репозитория):
    ```bash
    pnpm install
    pnpm run dev
    ```
 
-4. Открыть `http://localhost:5173`. Vite проксирует `/api/*` и `/ws` к nginx на `:80`.
+3. Открыть `http://localhost:5173`. Vite проксирует запросы `/api/*` к nginx на `:80` (включая WebSocket-чат — он живёт под `/api/chat/ws/...`, отдельного `/ws`-маршрута нет).
 
 **Полезные команды Docker:**
 ```bash
@@ -82,10 +84,11 @@ src/
 ├── features/
 │   ├── auth/             страницы входа/регистрации, контекст, хуки, API
 │   ├── chat/             WebSocket-чат (страница, компоненты, хук useChatSocket)
-│   └── profile/          страница профиля с формой редактирования
-└── shared/
-    ├── api/              httpClient, config (API_BASE_URL, WS_URL)
-    ├── lib/              validators (email, password)
-    ├── ui/               общие компоненты и SVG-иконки
-    └── styles/           design-токены (variables.css) и global.css
+│   ├── profile/          страница профиля с формой редактирования
+│   └── library/          библиотека документов: дерево тем, поиск, просмотр/скачивание
+├── shared/
+│   ├── api/              httpClient, config (API_BASE_URL, WS_URL)
+│   ├── lib/              validators (email, password)
+│   └── ui/               общие компоненты и SVG-иконки
+└── styles/               design-токены (variables.css) и global.css
 ```
