@@ -40,8 +40,6 @@ pnpm run lint      # ESLint
 
 ## Запуск локально (фронт + бэк)
 
-Бэкенд (`backend-con/`) лежит прямо в этом репозитории — read-only, туда ничего не пишем, используем только как API-контракт (см. [CLAUDE.md](CLAUDE.md), [docs/API.md](docs/API.md)).
-
 1. Поднять бэк:
    ```bash
    cd backend-con/pochemuchnic-miem-prj
