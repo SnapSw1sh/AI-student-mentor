@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.status {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.statusError {
+  color: var(--color-error);
+  font-size: 14px;
+}
+
+.frame {
+  width: 100%;
+  height: 70vh;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--input-radius);
+}
+
+.image {
+  max-width: 100%;
+  border-radius: var(--input-radius);
+}
+
+.media {
+  width: 100%;
+}
+
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  height: var(--btn-height);
+  padding: 0 24px;
+  border: none;
+  border-radius: var(--input-radius);
+  background: var(--color-primary);
+  color: white;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.downloadBtn:hover:not(:disabled) {
+  background: var(--color-primary-pressed);
+}
+
+.downloadBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.downloadIcon {
+  width: 16px;
+  height: 16px;
+}

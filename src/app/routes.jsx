@@ -11,6 +11,11 @@ import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
 import { ChatPage } from '../features/chat/pages/ChatPage';
+import { LibraryProvider } from '../features/library/context/LibraryProvider';
+import { LibraryLayout } from '../features/library/pages/LibraryLayout';
+import { LibraryHomePage } from '../features/library/pages/LibraryHomePage';
+import { LibraryTopicPage } from '../features/library/pages/LibraryTopicPage';
+import { LibraryDocumentPage } from '../features/library/pages/LibraryDocumentPage';
 import { AppLayout } from './AppLayout';
 import styles from './Placeholder.module.css';
 
@@ -42,8 +47,16 @@ export function AppRoutes() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/library"
-            element={<Placeholder title="Библиотека" text="Появится на Этапе 4." />}
-          />
+            element={
+              <LibraryProvider>
+                <LibraryLayout />
+              </LibraryProvider>
+            }
+          >
+            <Route index element={<LibraryHomePage />} />
+            <Route path="topics/:topicId" element={<LibraryTopicPage />} />
+            <Route path="documents/:documentId" element={<LibraryDocumentPage />} />
+          </Route>
           <Route
             path="/campus"
             element={<Placeholder title="Навигация по кампусу" text="В разработке." />}

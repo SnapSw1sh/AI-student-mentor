@@ -12,3 +12,7 @@ export { AvatarPlaceholderIcon } from './AvatarPlaceholderIcon';
 export { SidebarUserIcon } from './SidebarUserIcon';
 export { LogoutIcon } from './LogoutIcon';
 export { SendIcon } from './SendIcon';
+export { SearchIcon } from './SearchIcon';
+export { DownloadIcon } from './DownloadIcon';
+export { DocumentIcon } from './DocumentIcon';
+export { FolderIcon } from './FolderIcon';

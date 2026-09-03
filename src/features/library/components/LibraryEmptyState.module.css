@@ -1,0 +1,5 @@
+.empty {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  padding: 24px 0;
+}

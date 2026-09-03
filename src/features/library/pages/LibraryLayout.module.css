@@ -1,0 +1,45 @@
+.page {
+  width: 100%;
+  max-width: 940px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 128px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 51px;
+  margin-bottom: 56px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 32px;
+}
+
+.titleIcon {
+  font-size: 38px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-top: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .header {
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+}

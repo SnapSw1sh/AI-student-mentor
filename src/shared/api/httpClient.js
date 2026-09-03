@@ -58,7 +58,7 @@ const performRequest = async (url, options) => {
   });
 };
 
-export const request = async (path, options = {}) => {
+const performWithRetry = async (path, options = {}) => {
   const url = buildUrl(path);
   const init = { ...options };
   if (init.body && typeof init.body !== 'string' && !(init.body instanceof FormData)) {
@@ -76,6 +76,11 @@ export const request = async (path, options = {}) => {
     }
   }
 
+  return response;
+};
+
+export const request = async (path, options = {}) => {
+  const response = await performWithRetry(path, options);
   const body = await parseBody(response);
 
   if (!response.ok) {
@@ -85,10 +90,22 @@ export const request = async (path, options = {}) => {
   return body;
 };
 
+const requestBlob = async (path, options = {}) => {
+  const response = await performWithRetry(path, options);
+
+  if (!response.ok) {
+    const body = await parseBody(response);
+    throw new ApiError(response.status, body, body?.detail || body?.message);
+  }
+
+  return { blob: await response.blob(), contentType: response.headers.get('Content-Type') };
+};
+
 export const httpClient = {
   get: (path, options) => request(path, { ...options, method: 'GET' }),
   post: (path, body, options) => request(path, { ...options, method: 'POST', body }),
   patch: (path, body, options) => request(path, { ...options, method: 'PATCH', body }),
   put: (path, body, options) => request(path, { ...options, method: 'PUT', body }),
   delete: (path, options) => request(path, { ...options, method: 'DELETE' }),
+  getBlob: (path, options) => requestBlob(path, { ...options, method: 'GET' }),
 };
