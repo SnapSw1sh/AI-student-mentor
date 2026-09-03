@@ -105,11 +105,6 @@ docker compose logs auth-svc  # посмотреть логи (например,
 
 - `GET /ping` — healthcheck
 
-### Не для фронта
-
-- `POST /api/auth/resend-verification` — есть в auth-svc, но не проброшен через nginx (нет в whitelist regex)
-- `WS /api/chat/ws/internal/llm`, `/internal/*` (auth-svc), `/health`/`/healthz` сервисов, весь `db-svc` — служебные/межсервисные, не для UI
-
 ## Структура
 
 ```
