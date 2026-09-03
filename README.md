@@ -74,6 +74,42 @@ docker compose logs auth-svc  # посмотреть логи (например,
 
 > Перед релизом надо убрать тестовый акк из `LoginPage.jsx` и `AuthProvider.jsx`.
 
+## Документация API
+
+### auth-svc
+
+- `POST /api/auth/register`
+- `GET /api/auth/verify-email?token=...`
+- `POST /api/auth/login`
+- `POST /api/auth/refresh`
+- `POST /api/auth/logout`
+- `POST /api/auth/forgot-password`
+- `POST /api/auth/update-password`
+- `GET /api/users/me`
+- `PATCH /api/users/me`
+- `DELETE /api/users/me`
+
+### chat-svc
+
+- `WS /api/chat/ws/chat?token=<access_token>`
+
+### library-svc
+
+- `GET /api/library/tree`
+- `POST /api/library/refresh`
+- `GET /api/documents/{document_id}`
+- `GET /api/documents/{document_id}/preview`
+- `GET /api/documents/{document_id}/download`
+
+### nginx (служебные)
+
+- `GET /ping` — healthcheck
+
+### Не для фронта
+
+- `POST /api/auth/resend-verification` — есть в auth-svc, но не проброшен через nginx (нет в whitelist regex)
+- `WS /api/chat/ws/internal/llm`, `/internal/*` (auth-svc), `/health`/`/healthz` сервисов, весь `db-svc` — служебные/межсервисные, не для UI
+
 ## Структура
 
 ```
