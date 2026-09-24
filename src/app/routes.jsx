@@ -9,6 +9,8 @@ import { NewPasswordSuccessPage } from '../features/auth/pages/NewPasswordSucces
 import { LinkErrorPage } from '../features/auth/pages/LinkErrorPage';
 import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
+import { GuestGate } from '../features/auth/components/GuestGate';
+import { HomePage } from '../features/home/pages/HomePage';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
 import { ChatPage } from '../features/chat/pages/ChatPage';
 import { LibraryProvider } from '../features/library/context/LibraryProvider';
@@ -41,30 +43,49 @@ export function AppRoutes() {
       <Route path="/link-error" element={<LinkErrorPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />
 
-      <Route element={<ProtectedRoute />}>
-        <Route element={<AppLayout />}>
-          <Route path="/" element={<ChatPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route
-            path="/library"
-            element={
+      {/* Разделы открыты гостю; за ProtectedRoute только профиль. */}
+      <Route element={<AppLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/chat"
+          element={
+            <GuestGate
+              feature="chat"
+              title="ИИ-помощник"
+              text="Чтобы задать вопрос, войдите или зарегистрируйтесь."
+            >
+              <ChatPage />
+            </GuestGate>
+          }
+        />
+        <Route
+          path="/library"
+          element={
+            <GuestGate
+              feature="library"
+              title="Библиотека"
+              text="Библиотека пока доступна только после входа."
+            >
               <LibraryProvider>
                 <LibraryLayout />
               </LibraryProvider>
-            }
-          >
-            <Route index element={<LibraryHomePage />} />
-            <Route path="topics/:topicId" element={<LibraryTopicPage />} />
-            <Route path="documents/:documentId" element={<LibraryDocumentPage />} />
-          </Route>
-          <Route
-            path="/campus"
-            element={<Placeholder title="Навигация по кампусу" text="В разработке." />}
-          />
-          <Route
-            path="/support"
-            element={<Placeholder title="Техническая поддержка" text="В разработке." />}
-          />
+            </GuestGate>
+          }
+        >
+          <Route index element={<LibraryHomePage />} />
+          <Route path="topics/:topicId" element={<LibraryTopicPage />} />
+          <Route path="documents/:documentId" element={<LibraryDocumentPage />} />
+        </Route>
+        <Route
+          path="/campus"
+          element={<Placeholder title="Навигация по кампусу" text="В разработке." />}
+        />
+        <Route
+          path="/support"
+          element={<Placeholder title="Техническая поддержка" text="В разработке." />}
+        />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
 

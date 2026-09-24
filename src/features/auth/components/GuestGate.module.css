@@ -1,0 +1,52 @@
+.gate {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: var(--wrapper-width);
+  padding: var(--wrapper-padding);
+  background: var(--color-surface);
+  border-radius: var(--wrapper-radius);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.register {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.register a {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.register a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+}

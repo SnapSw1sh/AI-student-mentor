@@ -16,6 +16,9 @@ const PROGRAM_OPTIONS = [
 
 const GROUP_OPTIONS = ['1', '2', '3', '4', '5', '6'];
 
+// Бэк хранит в `year` курс, а не год поступления: в БД CHECK (year BETWEEN 1 AND 6).
+const COURSE_OPTIONS = ['1', '2', '3', '4', '5', '6'];
+
 function EditableField({ id, value, placeholder, onChange, error, type = 'text' }) {
   return (
     <label
@@ -104,13 +107,11 @@ export function PersonalDataForm() {
     event.preventDefault();
     setServerError('');
 
+    // Факультет и направление бэку пока не уходят (PROBLEMS.md#1), поэтому сохранение не блокируют.
     const next = {};
-    ['first_name', 'last_name', 'faculty', 'program', 'year', 'group_name'].forEach((key) => {
+    ['first_name', 'last_name', 'year', 'group_name'].forEach((key) => {
       if (!form[key].toString().trim()) next[key] = true;
     });
-    if (form.year.trim() && !/^\d{4}$/.test(form.year.trim())) {
-      next.year = true;
-    }
     setErrors(next);
     if (Object.keys(next).length) return;
 
@@ -134,8 +135,6 @@ export function PersonalDataForm() {
       setSubmitting(false);
     }
   };
-
-  const showProgramError = errors.program;
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} noValidate>
@@ -182,7 +181,6 @@ export function PersonalDataForm() {
               value={form.faculty}
               placeholder="Факультет"
               onChange={(v) => setField('faculty', v)}
-              error={errors.faculty}
             />
           </div>
         </div>
@@ -195,22 +193,19 @@ export function PersonalDataForm() {
             placeholder="Выбрать направление"
             onChange={(v) => setField('program', v)}
             options={PROGRAM_OPTIONS}
-            error={errors.program}
             full
           />
-          {showProgramError && (
-            <p className={styles.fieldErrorMessage}>Пропущенное обязательное поле.</p>
-          )}
         </div>
 
         <div className={styles.row}>
           <div className={styles.col}>
-            <label htmlFor="year" className={styles.label}>Год поступления</label>
-            <EditableField
+            <label htmlFor="year" className={styles.label}>Курс</label>
+            <SelectField
               id="year"
               value={form.year}
-              placeholder="202X"
-              onChange={(v) => setField('year', v.replace(/\D/g, '').slice(0, 4))}
+              placeholder="Выбрать курс"
+              onChange={(v) => setField('year', v)}
+              options={COURSE_OPTIONS}
               error={errors.year}
             />
           </div>
@@ -232,7 +227,7 @@ export function PersonalDataForm() {
       {saved && !serverError && <p className={styles.savedMessage}>Изменения сохранены.</p>}
 
       <div className={styles.actions}>
-        <Link to="/" className={styles.actionGhost}>
+        <Link to="/chat" className={styles.actionGhost}>
           Перейти в ИИ-помощник
         </Link>
         <button type="submit" className={styles.actionPrimary} disabled={submitting}>

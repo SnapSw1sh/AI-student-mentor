@@ -14,9 +14,9 @@ export function Button({ children, type = 'button', disabled, onClick, className
   );
 }
 
-export function ButtonLink({ to, children, className }) {
+export function ButtonLink({ to, state, children, className }) {
   return (
-    <Link to={to} className={`${styles.btn} ${className ?? ''}`.trim()}>
+    <Link to={to} state={state} className={`${styles.btn} ${className ?? ''}`.trim()}>
       {children}
     </Link>
   );

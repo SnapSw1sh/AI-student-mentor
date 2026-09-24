@@ -1,14 +1,7 @@
-import { useEffect, useRef } from 'react';
 import { Message } from './Message';
 import styles from './MessageList.module.css';
 
 export function MessageList({ messages, streamingId }) {
-  const endRef = useRef(null);
-
-  useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [messages, streamingId]);
-
   return (
     <div className={styles.list}>
       {messages.map((message) => (
@@ -19,7 +12,6 @@ export function MessageList({ messages, streamingId }) {
           streaming={message.id === streamingId}
         />
       ))}
-      <div ref={endRef} />
     </div>
   );
 }

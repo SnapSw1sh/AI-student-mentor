@@ -99,32 +99,6 @@ export function AuthProvider({ children }) {
     return profile;
   }, []);
 
-  // ======================================================================
-  // DELETE TEST USER BEFORE PRODUCTION
-  // ----------------------------------------------------------------------
-  // Временный обход бэкенда: фронт ещё пишется, бэк локально не поднят, а
-  // защищённые страницы (/profile и т.д.) живут только за `ProtectedRoute`.
-  // Чтобы их можно было визуально проверять без `docker compose up`, в
-  // `LoginPage` добавлен bypass на пару `admin@edu.hse.ru` / `admin` —
-  // при успехе вызывается `loginAsTestUser()`, который кладёт фейковые
-  // токен и user в стейт без сетевых запросов.
-  // Перед продом удалить:
-  //   1. Этот `loginAsTestUser` целиком (и из `value` ниже).
-  //   2. Bypass-блок в `src/features/auth/pages/LoginPage.jsx`.
-  // ======================================================================
-  const loginAsTestUser = useCallback(() => {
-    setAccessToken('test-bypass-token');
-    setUser({
-      id: 'test-user',
-      email: 'admin@edu.hse.ru',
-      first_name: 'Тестовый',
-      last_name: 'Пользователь',
-      year: 2026,
-      group_name: '5',
-      role: 'student',
-    });
-  }, [setAccessToken]);
-
   const value = useMemo(
     () => ({
       accessToken,
@@ -136,7 +110,6 @@ export function AuthProvider({ children }) {
       refresh,
       refreshProfile,
       updateProfile,
-      loginAsTestUser,
     }),
     [
       accessToken,
@@ -147,7 +120,6 @@ export function AuthProvider({ children }) {
       refresh,
       refreshProfile,
       updateProfile,
-      loginAsTestUser,
     ],
   );
 

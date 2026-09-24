@@ -81,7 +81,11 @@
   padding: 0;
 }
 
-.cursor {
+/* Курсор — псевдоэлемент последнего блока markdown. Отдельный элемент после <ReactMarkdown>
+   оказывался за блочным <p> и переносился на новую строку. */
+.markdownTyping > :last-child:not(ul, ol, pre)::after,
+.markdownTyping > :is(ul, ol):last-child > li:last-child::after {
+  content: '';
   display: inline-block;
   width: 7px;
   height: 16px;
@@ -94,5 +98,54 @@
 @keyframes blink {
   to {
     visibility: hidden;
+  }
+}
+
+.missing {
+  color: #939598;
+  font-style: italic;
+}
+
+.thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 23px;
+}
+
+.thinkingDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0F2E6B;
+  opacity: 0.35;
+  animation: thinking 1.2s ease-in-out infinite;
+}
+
+.thinkingDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.thinkingDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes thinking {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinkingDot {
+    animation: none;
+    opacity: 0.6;
   }
 }

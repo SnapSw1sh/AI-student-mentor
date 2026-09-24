@@ -19,7 +19,7 @@ export function ProfilePage() {
           onTabChange={setActiveTab}
           fullName={fullName}
         />
-        <PersonalDataForm key={user?.id ?? 'anon'} />
+        <PersonalDataForm key={user?.user_id ?? 'anon'} />
       </div>
     </div>
   );

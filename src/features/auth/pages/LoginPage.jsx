@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../../../shared/ui/Logo';
 import { Button } from '../../../shared/ui/Button';
 import { FormError } from '../../../shared/ui/FormError';
@@ -16,8 +16,9 @@ export function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const { login, loginAsTestUser } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,25 +33,11 @@ export function LoginPage() {
       return;
     }
 
-    // ======================================================================
-    // DELETE TEST USER BEFORE PRODUCTION
-    // ----------------------------------------------------------------------
-    // Bypass для визуального тестирования защищённых страниц без поднятого
-    // бэкенда. Пара `admin@edu.hse.ru` / `admin` мгновенно логинит фейкового
-    // пользователя и редиректит на /profile, не дёргая `/api/auth/login`.
-    // При продакшен-сборке убрать этот блок целиком, а в AuthProvider —
-    // метод `loginAsTestUser` (помечен таким же баннером).
-    // ======================================================================
-    if (email.trim() === 'admin@edu.hse.ru' && password === 'admin') {
-      loginAsTestUser();
-      navigate('/profile', { replace: true });
-      return;
-    }
-
     setSubmitting(true);
     try {
       await login(email.trim(), password);
-      navigate('/', { replace: true });
+      // Возвращаем туда, откуда пришли на вход: из плашки GuestGate или из ProtectedRoute.
+      navigate(location.state?.from ?? '/', { replace: true });
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
         setError('Неверная почта или пароль. Проверьте и попробуйте снова.');

@@ -7,6 +7,27 @@
   padding: 0 32px;
   height: 80px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: margin-top 0.2s ease;
+}
+
+/* margin, а не transform: так освободившееся место действительно отдаётся под контент. */
+.headerCollapsed {
+  margin-top: -80px;
+}
+
+/* Навигация с клавиатуры не должна упираться в спрятанный хедер. Именно :focus-visible,
+   а не :focus-within: после клика мышкой по ссылке в шапке фокус остаётся на ней,
+   и с :focus-within хедер переставал прятаться вовсе. */
+.headerCollapsed:has(:focus-visible) {
+  margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+  }
 }
 
 .logoLink {

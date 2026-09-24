@@ -1,28 +1,57 @@
+/* Занимает всю область .main вместе с её паддингами и не растёт по содержимому:
+   прокручивается только .scroll, поле ввода всегда внизу. */
 .page {
+  --chat-pad-x: 20px;
+
   flex: 1;
   align-self: stretch;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   background: #F6F6F6;
-  padding: 40px 20px;
   min-height: 0;
-  height: calc(100vh - 80px);
-  box-sizing: border-box;
-  margin: -32px -16px -40px;
+  margin:
+    calc(-1 * var(--main-pad-top))
+    calc(-1 * var(--main-pad-x))
+    calc(-1 * var(--main-pad-bottom));
 }
 
-.container {
+/* Пустой чат: приветствие и поле ввода вместе по центру экрана. */
+.pageEmpty {
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Колонка контента шириной 780 px по центру. Прокручиваемая область вокруг неё — на всю
+   ширину, поэтому полоса прокрутки у края страницы, а не у колонки. */
+.column {
   width: 100%;
-  max-width: 780px;
+  max-width: calc(780px + 2 * var(--chat-pad-x));
+  margin: 0 auto;
+  padding: 0 var(--chat-pad-x);
+}
+
+/* Верхний отступ — внутри прокручиваемой области: текст уходит вверх до самого хедера,
+   без полосы фона под ним. */
+.messagesColumn {
+  padding-top: 40px;
+  padding-bottom: 16px;
+}
+
+.bottom {
+  flex-shrink: 0;
+}
+
+.composerColumn {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  min-height: 0;
+  gap: 14px;
+  padding-top: 8px;
+  padding-bottom: 16px;
 }
 
-.containerEmpty {
-  justify-content: center;
-  flex: 1;
+.pageEmpty .composerColumn {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .composer {
@@ -34,11 +63,8 @@
 
 .scroll {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding-right: 4px;
 }
 
 .scroll::-webkit-scrollbar {
@@ -71,6 +97,14 @@
 
 @media (max-width: 768px) {
   .page {
-    padding: 20px 12px;
+    --chat-pad-x: 12px;
+  }
+
+  .messagesColumn {
+    padding-top: 20px;
+  }
+
+  .composerColumn {
+    padding-bottom: 12px;
   }
 }
