@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { libraryApi } from '../api/libraryApi';
 import { ApiError } from '../../../shared/api/httpClient';
 import { DownloadIcon } from '../../../shared/ui/icons';
+import { UserFacingError } from '../../../shared/notifications/describeError';
+import { useNotify } from '../../../shared/notifications/useNotify';
 import styles from './LibraryDocumentPreview.module.css';
 
 function renderPreview(mode, url, styleClasses) {
@@ -21,6 +23,7 @@ export function LibraryDocumentPreview({ document: doc }) {
   const [previewStatus, setPreviewStatus] = useState('idle');
   const [previewUrl, setPreviewUrl] = useState(null);
   const [downloading, setDownloading] = useState(false);
+  const notify = useNotify();
 
   useEffect(() => {
     let cancelled = false;
@@ -56,6 +59,9 @@ export function LibraryDocumentPreview({ document: doc }) {
     setDownloading(true);
     try {
       const { blob } = await libraryApi.getDocumentDownload(doc.id);
+      // library-svc при ошибке чтения из хранилища отвечает 200 с пустым телом — без этой
+      // проверки пользователь получил бы пустой файл вместо ошибки.
+      if (blob.size === 0) throw new UserFacingError('Файл пустой — возможно, он повреждён на сервере.');
       const objectUrl = URL.createObjectURL(blob);
       const link = window.document.createElement('a');
       link.href = objectUrl;
@@ -64,6 +70,8 @@ export function LibraryDocumentPreview({ document: doc }) {
       link.click();
       window.document.body.removeChild(link);
       URL.revokeObjectURL(objectUrl);
+    } catch (err) {
+      notify.error('Не удалось скачать документ', err);
     } finally {
       setDownloading(false);
     }

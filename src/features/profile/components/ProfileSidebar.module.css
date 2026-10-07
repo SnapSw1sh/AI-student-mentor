@@ -104,8 +104,13 @@
   background: var(--color-secondary);
 }
 
-.tab:hover:not(.tabActive) {
+.tab:hover:not(.tabActive):not(:disabled) {
   background: rgba(203, 221, 237, 0.5);
+}
+
+.tab:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
 
 .logout {

@@ -1,0 +1,288 @@
+.panel {
+  --level-color: var(--color-grade-empty);
+  --level-bg: var(--color-grade-empty-bg);
+
+  width: 279px;
+  flex-shrink: 0;
+  min-height: 320px;
+  padding: 26px 25px;
+  border-radius: 14px;
+  background: var(--level-bg);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+.excellent {
+  --level-color: var(--color-grade-excellent);
+  --level-bg: var(--color-grade-excellent-bg);
+}
+
+.good {
+  --level-color: var(--color-grade-good);
+  --level-bg: var(--color-grade-good-bg);
+}
+
+.fair {
+  --level-color: var(--color-grade-fair);
+  --level-bg: var(--color-grade-fair-bg);
+}
+
+.poor {
+  --level-color: var(--color-grade-poor);
+  --level-bg: var(--color-grade-poor-bg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.modes {
+  padding: 2px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.65);
+  display: flex;
+  gap: 2px;
+}
+
+.mode {
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--color-label);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mode:hover {
+  color: var(--color-heading);
+}
+
+.modeActive,
+.modeActive:hover {
+  background: var(--color-surface);
+  color: var(--color-navy);
+  box-shadow: 0 1px 3px rgba(5, 20, 51, 0.08);
+}
+
+.mode:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.score {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.value {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 53px;
+  color: var(--level-color);
+  transition: color 0.3s ease;
+}
+
+.outOf {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+.track {
+  height: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: var(--color-progress-track);
+  overflow: hidden;
+}
+
+.empty .track {
+  background: var(--color-field-border);
+}
+
+.bar {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--level-color);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.caption {
+  min-height: 12px;
+  margin-top: 6px;
+  font-size: 9px;
+  color: var(--color-label);
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  margin: 12px 0 15px;
+  background: var(--color-field-border);
+}
+
+.hint {
+  min-height: 66px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--color-tag-bg);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hintText {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.hintBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.hintLine {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.targetInput {
+  width: 28px;
+  height: 22px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-navy);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.targetInput:hover {
+  border-color: var(--color-border-hover);
+}
+
+.targetInput:focus {
+  border-color: var(--color-focus);
+}
+
+.hintResult {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hintAccent {
+  color: var(--color-accent);
+}
+
+.hintWarning {
+  color: var(--color-grade-poor);
+}
+
+.hintNote {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+.calculate {
+  height: 40px;
+  margin-top: auto;
+  border-radius: 10px;
+  background: var(--color-navy);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.calculate:hover:not(:disabled) {
+  background: var(--color-primary);
+}
+
+.calculate:active:not(:disabled) {
+  background: var(--color-primary-pressed);
+}
+
+.calculate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.calculate:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .value,
+  .bar {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .panel {
+    width: 100%;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel {
+    padding: 20px 16px;
+  }
+  .title {
+    font-size: 14px;
+  }
+  .mode {
+    height: 26px;
+    font-size: 11px;
+  }
+  .caption,
+  .hintNote,
+  .hintText,
+  .hintLine {
+    font-size: 12px;
+  }
+  .targetInput {
+    width: 34px;
+    height: 28px;
+    font-size: 13px;
+  }
+  .calculate {
+    height: 44px;
+    font-size: 13px;
+  }
+}

@@ -13,6 +13,56 @@
   --color-muted-2: #969798;
   --color-input-bg: #F6F6F6;
 
+  /* Страница «О проекте» */
+  --color-heading: #090E1C;
+  --color-accent: #1466ED;
+  --color-text-secondary: #707D96;
+  --color-placeholder: #9EA8BA;
+  --color-navy: #092963;
+  --color-divider: #E0E8F2;
+  --color-surface-soft: #FAFBFF;
+  --color-tag-bg: #E8F5FF;
+  --color-section-bg: rgba(194, 222, 255, 0.2);
+
+  --color-feature-blue: #1466ED;
+  --color-feature-blue-bg: #E8F5FF;
+  --color-feature-red: #E52957;
+  --color-feature-red-bg: #FFEBF2;
+  --color-feature-green: #1CA857;
+  --color-feature-green-bg: #E8FAF0;
+  --color-feature-purple: #6B2EDB;
+  --color-feature-purple-bg: #F2EBFF;
+
+  /* Главная и калькулятор оценок */
+  --color-label: #758096;
+  --color-field-border: #E3E8F2;
+  --color-widget-border: rgba(190, 196, 208, 0.5);
+  --color-formula-bg: #F6F9FC;
+  --color-formula-chip: #F0F2F7;
+  --color-progress-track: #E0EBE3;
+
+  --color-dot-activity: #ED5259;
+  --color-dot-labs: #1466ED;
+  --color-dot-homework: #F5A81F;
+  --color-dot-tests: #8554ED;
+  --color-dot-exam: #0D9E52;
+
+  /* Уровни оценки: от 8 — отлично, 6–7 — хорошо, 4–5 — удовлетворительно, ниже 4 — неуд. */
+  --color-grade-excellent: #0D9E52;
+  --color-grade-excellent-bg: #F2FCF5;
+  --color-grade-good: #5FA319;
+  --color-grade-good-bg: #F5FBEA;
+  --color-grade-fair: #F5A81F;
+  --color-grade-fair-bg: #FFF7E0;
+  --color-grade-poor: #E01F29;
+  --color-grade-poor-bg: #FFEDF0;
+  --color-grade-empty: #858FA3;
+  --color-grade-empty-bg: #F5F7FA;
+
+  --shadow-widget: 0 5px 9px rgba(5, 20, 51, 0.05);
+  --shadow-card: 0 8px 24px rgba(5, 20, 51, 0.06);
+  --shadow-preview: 0 14px 32px rgba(5, 20, 51, 0.12);
+
   --font-primary: 'Inter', 'Roboto', sans-serif;
 
   --wrapper-width: 408px;

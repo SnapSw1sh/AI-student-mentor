@@ -72,9 +72,19 @@
   background: var(--color-primary-pressed);
 }
 
+/* В колонке flex: 1 означает «высота 0 и растягивайся», и height поля перестаёт работать —
+   поле сжималось до высоты значка. Поэтому в колонке поле не растягивается. */
 @media (max-width: 768px) {
   .form {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
+  }
+  .wrapper {
+    flex: none;
+    height: 52px;
+  }
+  .submit {
+    height: 48px;
   }
 }

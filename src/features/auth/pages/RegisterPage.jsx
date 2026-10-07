@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Logo } from '../../../shared/ui/Logo';
+import { AuthLogoLink } from '../components/AuthLogoLink';
 import { Button } from '../../../shared/ui/Button';
 import { FormError } from '../../../shared/ui/FormError';
 import { ApiError } from '../../../shared/api/httpClient';
@@ -71,7 +71,7 @@ export function RegisterPage() {
 
   return (
     <>
-      <Logo />
+      <AuthLogoLink />
       <AuthWrapper>
         <form onSubmit={handleSubmit} noValidate>
           <h1 className={authStyles.formTitle}>Регистрация</h1>

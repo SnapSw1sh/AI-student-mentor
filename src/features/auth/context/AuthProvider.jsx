@@ -4,6 +4,7 @@ import {
   setRefreshHandler,
   setUnauthorizedHandler,
 } from '../../../shared/api/httpClient';
+import { useNotify } from '../../../shared/notifications/useNotify';
 import { authApi } from '../api/authApi';
 import { AuthContext } from './AuthContext.js';
 
@@ -12,6 +13,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [bootstrapped, setBootstrapped] = useState(false);
   const tokenRef = useRef(null);
+  const notify = useNotify();
 
   const setAccessToken = useCallback((token) => {
     tokenRef.current = token;
@@ -49,11 +51,12 @@ export function AuthProvider({ children }) {
     (async () => {
       const ok = await refresh();
       if (!cancelled && ok) {
+        // Сессия при этом остаётся: без профиля работают все разделы, кроме самого профиля.
         try {
           const profile = await authApi.getProfile();
           if (!cancelled) setUser(profile);
-        } catch {
-          /* профиль не критичен для bootstrap */
+        } catch (err) {
+          if (!cancelled) notify.error('Не удалось загрузить профиль', err);
         }
       }
       if (!cancelled) setBootstrapped(true);
@@ -61,7 +64,7 @@ export function AuthProvider({ children }) {
     return () => {
       cancelled = true;
     };
-  }, [refresh]);
+  }, [refresh, notify]);
 
   const login = useCallback(
     async (email, password) => {
@@ -70,12 +73,13 @@ export function AuthProvider({ children }) {
       try {
         const profile = await authApi.getProfile();
         setUser(profile);
-      } catch {
+      } catch (err) {
         setUser(null);
+        notify.error('Не удалось загрузить профиль', err);
       }
       return data;
     },
-    [setAccessToken],
+    [setAccessToken, notify],
   );
 
   const logout = useCallback(async () => {

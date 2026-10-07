@@ -227,8 +227,8 @@ export function PersonalDataForm() {
       {saved && !serverError && <p className={styles.savedMessage}>Изменения сохранены.</p>}
 
       <div className={styles.actions}>
-        <Link to="/chat" className={styles.actionGhost}>
-          Перейти в ИИ-помощник
+        <Link to="/" className={styles.actionGhost}>
+          Перейти на главную
         </Link>
         <button type="submit" className={styles.actionPrimary} disabled={submitting}>
           {submitting ? 'Сохранение…' : 'Сохранить изменения'}

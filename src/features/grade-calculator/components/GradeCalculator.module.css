@@ -1,0 +1,205 @@
+.card {
+  padding: 30px;
+  border: 1px solid var(--color-widget-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  align-items: stretch;
+  gap: 25px;
+}
+
+.form {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.subtitle {
+  font-size: 11px;
+  color: var(--color-label);
+}
+
+.tabs {
+  width: 307px;
+  max-width: 100%;
+  margin-top: 3px;
+  border-radius: 8px;
+  background: var(--color-input-bg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.tab {
+  height: 32px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-label);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--color-heading);
+}
+
+.tabActive,
+.tabActive:hover {
+  background: var(--color-accent);
+  color: white;
+  font-weight: 600;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 50px;
+}
+
+.selectField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subjectField {
+  flex: 1 1 260px;
+  max-width: 350px;
+}
+
+.courseField {
+  flex: 0 1 183px;
+}
+
+.fieldLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+.selectBox {
+  position: relative;
+  display: block;
+}
+
+.select {
+  width: 100%;
+  height: 40px;
+  padding: 0 48px 0 24px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-heading);
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.courseField .select {
+  padding-left: 19px;
+}
+
+.select:hover:not(:disabled) {
+  border-color: var(--color-border-hover);
+}
+
+.select:focus {
+  border-color: var(--color-focus);
+}
+
+.select:disabled {
+  color: var(--color-label);
+  cursor: not-allowed;
+}
+
+.selectIcon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 12px;
+  height: 8px;
+  color: var(--color-heading);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sum {
+  font-size: 10px;
+  color: var(--color-label);
+}
+
+.sumInvalid {
+  color: var(--color-grade-poor);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab,
+  .select {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .card {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .subtitle,
+  .fieldLabel,
+  .sum {
+    font-size: 12px;
+  }
+  .tabs {
+    width: 100%;
+  }
+  .tab {
+    height: 36px;
+    font-size: 12px;
+  }
+  .select {
+    font-size: 14px;
+  }
+  .subjectField,
+  .courseField {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}

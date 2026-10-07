@@ -1,0 +1,271 @@
+.card {
+  --icon-size: 62px;
+  --icon-gap: 22px;
+  /* Всё, что ниже заголовка, выровнено по колонке текста, а не по иконке. */
+  --content-offset: calc(var(--icon-size) + var(--icon-gap));
+
+  padding: 32px 28px;
+  background: var(--color-surface);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.blue {
+  --feature-color: var(--color-feature-blue);
+  --feature-bg: var(--color-feature-blue-bg);
+}
+
+.red {
+  --feature-color: var(--color-feature-red);
+  --feature-bg: var(--color-feature-red-bg);
+}
+
+.green {
+  --feature-color: var(--color-feature-green);
+  --feature-bg: var(--color-feature-green-bg);
+}
+
+.purple {
+  --feature-color: var(--color-feature-purple);
+  --feature-bg: var(--color-feature-purple-bg);
+}
+
+.heading {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.toggle {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--icon-gap);
+  border-radius: 12px;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 6px;
+}
+
+.iconBox {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: var(--feature-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.text {
+  flex: 1;
+  max-width: 336px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.description {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.indicator {
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--feature-bg);
+  color: var(--feature-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.toggle:hover .indicator {
+  transform: scale(1.08);
+}
+
+.arrow {
+  width: 18px;
+  height: 18px;
+}
+
+.chevron {
+  width: 14px;
+  height: 9px;
+  transform: rotate(180deg);
+}
+
+/* Высота анимируется через grid-template-rows: 0fr → 1fr, без замеров в JS. */
+.collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.expanded .collapsible {
+  grid-template-rows: 1fr;
+}
+
+.collapsibleInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.points {
+  margin: 12px 0 0 var(--content-offset);
+  padding: 16px 0 0;
+  border-top: 1px solid var(--color-divider);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.point {
+  position: relative;
+  padding-left: 14px;
+  font-size: 11px;
+  line-height: 14px;
+  color: var(--color-heading);
+}
+
+.point::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--feature-color);
+}
+
+.tags {
+  margin: 17px 0 0 var(--content-offset);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: var(--color-tag-bg);
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/* Отступы, компенсированные отрицательными полями, — чтобы обводка фокуса у кнопки
+   не обрезалась контейнером с overflow: hidden. */
+.actionRow {
+  margin: 0 -4px -4px;
+  padding: 10px 4px 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action {
+  min-width: 154px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: var(--feature-bg);
+  color: var(--feature-color);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: filter 0.2s ease;
+}
+
+.action:hover {
+  filter: brightness(0.96);
+}
+
+.action:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.actionArrow {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsible,
+  .indicator {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    --icon-size: 52px;
+    --icon-gap: 14px;
+    --content-offset: 0px;
+
+    padding: 20px 16px;
+  }
+  .iconBox {
+    border-radius: 14px;
+  }
+  .icon {
+    width: 34px;
+    height: 34px;
+  }
+  .text {
+    max-width: none;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .indicator {
+    width: 36px;
+    height: 36px;
+  }
+  .point {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .action {
+    width: 100%;
+    font-size: 12px;
+  }
+}

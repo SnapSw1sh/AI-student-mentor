@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Logo } from '../../../shared/ui/Logo';
+import { AuthLogoLink } from '../components/AuthLogoLink';
 import { Button } from '../../../shared/ui/Button';
 import { FormError } from '../../../shared/ui/FormError';
 import { isValidEmail } from '../../../shared/lib/validators';
@@ -37,7 +37,7 @@ export function ForgotPasswordPage() {
 
   return (
     <>
-      <Logo />
+      <AuthLogoLink />
       <AuthWrapper>
         <form onSubmit={handleSubmit} noValidate>
           <h1 className={authStyles.formTitle}>Сброс Пароля</h1>

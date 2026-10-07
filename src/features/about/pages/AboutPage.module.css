@@ -1,0 +1,24 @@
+.page {
+  width: 100%;
+  max-width: 1320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 62px;
+  font-family: var(--font-primary);
+  /* Размытые пятна за превью чата выходят за край сцены. На средних ширинах они упирались
+     бы в край экрана и давали горизонтальную прокрутку. */
+  overflow-x: clip;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    gap: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    gap: 32px;
+  }
+}

@@ -22,4 +22,7 @@ export const authApi = {
   getProfile: () => httpClient.get('/users/me'),
 
   updateProfile: (patch) => httpClient.patch('/users/me', patch),
+
+  // Выдаёт админу HttpOnly-куку для /admin/ и возвращает { url }. Не админу — 404.
+  openAdminSession: () => httpClient.post('/auth/admin-session'),
 };

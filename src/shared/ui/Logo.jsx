@@ -9,7 +9,7 @@ export function Logo({ className }) {
       viewBox="0 0 90 90"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="ВШЭ"
+      aria-label="Student Mentor"
     >
       <rect width="90" height="90" rx="45" fill="#0F2E6B" />
       <path

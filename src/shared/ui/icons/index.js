@@ -16,3 +16,7 @@ export { SearchIcon } from './SearchIcon';
 export { DownloadIcon } from './DownloadIcon';
 export { DocumentIcon } from './DocumentIcon';
 export { FolderIcon } from './FolderIcon';
+export { ArrowRightIcon } from './ArrowRightIcon';
+export { MenuIcon } from './MenuIcon';
+export { CloseIcon } from './CloseIcon';
+export { AdminPanelIcon } from './AdminPanelIcon';

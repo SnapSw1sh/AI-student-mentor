@@ -10,7 +10,9 @@ import { LinkErrorPage } from '../features/auth/pages/LinkErrorPage';
 import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
 import { GuestGate } from '../features/auth/components/GuestGate';
+import { useAuth } from '../features/auth/hooks/useAuth';
 import { HomePage } from '../features/home/pages/HomePage';
+import { AboutPage } from '../features/about/pages/AboutPage';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
 import { ChatPage } from '../features/chat/pages/ChatPage';
 import { LibraryProvider } from '../features/library/context/LibraryProvider';
@@ -30,6 +32,13 @@ function Placeholder({ title, text }) {
   );
 }
 
+// Один адрес на два состояния: у «О проекте» нет своего URL, поэтому вошедший пользователь
+// попасть на неё не может, а гость не видит главную.
+function RootPage() {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <HomePage /> : <AboutPage />;
+}
+
 export function AppRoutes() {
   return (
     <Routes>
@@ -43,14 +52,13 @@ export function AppRoutes() {
       <Route path="/link-error" element={<LinkErrorPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />
 
-      {/* Разделы открыты гостю; за ProtectedRoute только профиль. */}
+      {/* Гостю доступна только «О проекте»: в остальных разделах — плашка «Войдите». */}
       <Route element={<AppLayout />}>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<RootPage />} />
         <Route
           path="/chat"
           element={
             <GuestGate
-              feature="chat"
               title="ИИ-помощник"
               text="Чтобы задать вопрос, войдите или зарегистрируйтесь."
             >
@@ -61,11 +69,7 @@ export function AppRoutes() {
         <Route
           path="/library"
           element={
-            <GuestGate
-              feature="library"
-              title="Библиотека"
-              text="Библиотека пока доступна только после входа."
-            >
+            <GuestGate title="Библиотека" text="Библиотека доступна только после входа.">
               <LibraryProvider>
                 <LibraryLayout />
               </LibraryProvider>
@@ -77,12 +81,34 @@ export function AppRoutes() {
           <Route path="documents/:documentId" element={<LibraryDocumentPage />} />
         </Route>
         <Route
+          path="/materials"
+          element={
+            <GuestGate title="Материалы" text="Материалы доступны только после входа.">
+              <Placeholder title="Материалы" text="В разработке." />
+            </GuestGate>
+          }
+        />
+        <Route
           path="/campus"
-          element={<Placeholder title="Навигация по кампусу" text="В разработке." />}
+          element={
+            <GuestGate
+              title="Навигация по кампусу"
+              text="Навигация по кампусу доступна только после входа."
+            >
+              <Placeholder title="Навигация по кампусу" text="В разработке." />
+            </GuestGate>
+          }
         />
         <Route
           path="/support"
-          element={<Placeholder title="Техническая поддержка" text="В разработке." />}
+          element={
+            <GuestGate
+              title="Техническая поддержка"
+              text="Техническая поддержка доступна только после входа."
+            >
+              <Placeholder title="Техническая поддержка" text="В разработке." />
+            </GuestGate>
+          }
         />
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />

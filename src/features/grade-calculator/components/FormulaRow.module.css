@@ -1,0 +1,73 @@
+.formula {
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: var(--color-formula-bg);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.chip {
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: var(--color-formula-chip);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.weight {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.weightInput {
+  width: 46px;
+  height: 26px;
+  padding: 0 6px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.weightInput:hover {
+  border-color: var(--color-border-hover);
+}
+
+.weightInput:focus {
+  border-color: var(--color-focus);
+}
+
+.times,
+.plus {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.name {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+@media (max-width: 480px) {
+  .formula {
+    padding: 10px;
+    gap: 6px;
+  }
+  .chip {
+    gap: 6px;
+  }
+}

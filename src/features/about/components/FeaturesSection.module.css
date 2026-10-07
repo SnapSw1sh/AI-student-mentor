@@ -1,0 +1,57 @@
+.section {
+  width: 100%;
+  padding: 44px 56px 42px;
+  background: var(--color-section-bg);
+  border-radius: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+/* align-items: start — раскрытая карточка растёт сама, соседняя в ряду не тянется за ней. */
+.grid {
+  margin-top: 37px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 37px 67px;
+  align-items: start;
+}
+
+@media (max-width: 1280px) {
+  .grid {
+    column-gap: 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 36px 32px;
+  }
+  .grid {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 24px 12px;
+    border-radius: 18px;
+  }
+  .title {
+    padding: 0 4px;
+    font-size: 22px;
+  }
+  .grid {
+    margin-top: 20px;
+    gap: 16px;
+  }
+}
