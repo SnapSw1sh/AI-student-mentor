@@ -1,0 +1,201 @@
+.card {
+  padding: 20px;
+  border: 1px solid var(--color-widget-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-primary);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+.titles {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.count {
+  font-size: 12px;
+  color: var(--color-label);
+}
+
+.open {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--color-tag-bg);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.open:hover {
+  background: var(--color-border-hover);
+}
+
+.openIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.categories {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.category {
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 10px 8px 12px;
+  border-radius: 10px;
+  background: var(--color-formula-bg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.category:hover {
+  background: var(--color-formula-chip);
+}
+
+.categoryIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background: none;
+}
+
+.categoryText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.categoryTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryCount {
+  font-size: 11px;
+  color: var(--color-label);
+}
+
+.chevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--color-placeholder);
+}
+
+/* Тон задаёт цвет иконки; у квадрата предмета — ещё и фон. */
+.blue {
+  color: var(--color-feature-blue);
+}
+
+.purple {
+  color: var(--color-feature-purple);
+}
+
+.green {
+  color: var(--color-feature-green);
+}
+
+.orange {
+  color: var(--color-feature-orange);
+}
+
+.red {
+  color: var(--color-feature-red);
+}
+
+.iconBox.blue {
+  background: var(--color-feature-blue-bg);
+}
+
+.iconBox.purple {
+  background: var(--color-feature-purple-bg);
+}
+
+.iconBox.green {
+  background: var(--color-feature-green-bg);
+}
+
+.iconBox.orange {
+  background: var(--color-feature-orange-bg);
+}
+
+.iconBox.red {
+  background: var(--color-feature-red-bg);
+}
+
+.open:focus-visible,
+.category:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .open,
+  .category {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 16px;
+  }
+  .categories {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

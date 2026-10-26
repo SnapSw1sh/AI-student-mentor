@@ -1,0 +1,274 @@
+.card {
+  height: 100%;
+  min-height: 401px;
+  padding: 19px 16px 16px 20px;
+  border: 1px solid var(--color-widget-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-primary);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+/* Высота карточки задаётся соседним калькулятором; длинный список прокручивается внутри. */
+.list {
+  flex: 1;
+  min-height: 0;
+  max-height: 340px;
+  margin: 0 -6px 0 -4px;
+  padding: 0 6px 0 4px;
+  list-style: none;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item {
+  width: 100%;
+  padding: 6px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.item:hover {
+  background: var(--color-formula-bg);
+}
+
+.date {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--note-bg);
+  color: var(--note-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.dateDay {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.dateMonth {
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.subject {
+  font-size: 11px;
+  color: var(--color-label);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emptyText {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-label);
+}
+
+.filter {
+  position: relative;
+}
+
+.filterButton {
+  height: 30px;
+  min-width: 30px;
+  padding: 0 7px;
+  border: 1px solid var(--color-calendar-line);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-icon-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.filterButton:hover {
+  background: var(--color-formula-bg);
+}
+
+.filterActive,
+.filterActive:hover {
+  border-color: transparent;
+  background: var(--color-tag-bg);
+  color: var(--color-accent);
+}
+
+.filterIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.filterCount {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  width: 230px;
+  padding: 12px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-preview);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popoverTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.popoverEmpty {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--color-label);
+}
+
+.tagList {
+  max-height: 220px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tagOption {
+  min-height: 30px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.tagOption:hover {
+  background: var(--color-input-bg);
+}
+
+.tagOption input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.tagChip {
+  min-width: 0;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--note-bg);
+  color: var(--note-text);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reset {
+  align-self: flex-start;
+  padding: 2px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.reset:hover {
+  text-decoration: underline;
+}
+
+.item:focus-visible,
+.filterButton:focus-visible,
+.reset:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .card {
+    min-height: 0;
+  }
+  .list {
+    max-height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px 16px;
+  }
+  .title {
+    font-size: 18px;
+  }
+}

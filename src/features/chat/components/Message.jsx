@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import { useTypewriter } from '../hooks/useTypewriter';
+import { CopyAnswerButton } from './CopyAnswerButton';
 import styles from './Message.module.css';
 
 function ThinkingIndicator() {
@@ -20,26 +21,33 @@ export function Message({ role, content, streaming }) {
   const isMissing = !isUser && !streaming && !content;
   // Курсор виден, пока ответ приходит и пока допечатывается его хвост.
   const isTyping = streaming || shown.length < content.length;
+  // Кнопки под ответом — только когда он целиком на экране: копировать недописанное незачем.
+  const showActions = !isUser && !isThinking && !isMissing && !isTyping;
   const rowClass = `${styles.row} ${isUser ? styles.rowUser : styles.rowAssistant}`;
   const bubbleClass = `${styles.bubble} ${isUser ? styles.bubbleUser : styles.bubbleAssistant}`;
 
   return (
     <div className={rowClass}>
-      <div className={bubbleClass}>
-        {isUser && <p>{content}</p>}
-        {isThinking && <ThinkingIndicator />}
-        {isMissing && <p className={styles.missing}>Ответ не получен.</p>}
-        {!isUser && !isThinking && !isMissing && (
-          <div className={isTyping ? styles.markdownTyping : undefined}>
-            <ReactMarkdown
-              components={{
-                a: (props) => (
-                  <a {...props} target="_blank" rel="noopener noreferrer" />
-                ),
-              }}
-            >
-              {shown}
-            </ReactMarkdown>
+      <div className={styles.messageBlock}>
+        <div className={bubbleClass}>
+          {isUser && <p>{content}</p>}
+          {isThinking && <ThinkingIndicator />}
+          {isMissing && <p className={styles.missing}>Ответ не получен.</p>}
+          {!isUser && !isThinking && !isMissing && (
+            <div className={isTyping ? styles.markdownTyping : undefined}>
+              <ReactMarkdown
+                components={{
+                  a: (props) => <a {...props} target="_blank" rel="noopener noreferrer" />,
+                }}
+              >
+                {shown}
+              </ReactMarkdown>
+            </div>
+          )}
+        </div>
+        {showActions && (
+          <div className={styles.actions}>
+            <CopyAnswerButton markdown={content} />
           </div>
         )}
       </div>

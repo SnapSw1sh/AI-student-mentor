@@ -1,0 +1,181 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  min-height: 42px;
+  padding: 6px 8px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  cursor: text;
+  transition: border-color 0.2s ease;
+}
+
+.box:hover {
+  border-color: var(--color-border-hover);
+}
+
+.box:focus-within {
+  border-color: var(--color-focus);
+}
+
+.boxDragging,
+.boxDragging * {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* Тег в строке: ширина задаётся названием и при перестановке не меняется. */
+.chip {
+  height: 26px;
+  padding: 0 2px 0 9px;
+  border-radius: 6px;
+  background: var(--note-bg);
+  color: var(--note-text);
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  max-width: 100%;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.chipDragging {
+  box-shadow: 0 4px 12px rgba(5, 20, 51, 0.18);
+  opacity: 0.9;
+}
+
+.chipName {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chipButton {
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+  border-radius: 4px;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+.chipButton:hover,
+.chipButton:focus-visible {
+  opacity: 1;
+  background: rgba(9, 14, 28, 0.08);
+}
+
+.chipIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.input {
+  flex: 1;
+  min-width: 120px;
+  height: 26px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-heading);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+}
+
+/* Список открывается под полем, в потоке окна, а не поверх: окно прокручивается, и
+   всплывающий список у его края обрезался бы. */
+.options {
+  max-height: 200px;
+  margin: 6px 0 0;
+  padding: 4px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+  overflow-y: auto;
+}
+
+.option {
+  min-height: 34px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.optionActive {
+  background: var(--color-input-bg);
+}
+
+.optionChip {
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 6px;
+  background: var(--note-bg);
+  color: var(--note-text);
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+}
+
+.optionEdit {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--color-icon-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optionEdit:hover {
+  background: var(--color-field-border);
+}
+
+.create {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-heading);
+}
+
+.createIcon {
+  width: 11px;
+  height: 11px;
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box {
+    transition: none;
+  }
+}

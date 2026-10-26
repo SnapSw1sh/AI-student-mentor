@@ -32,6 +32,8 @@
   --color-feature-green-bg: #E8FAF0;
   --color-feature-purple: #6B2EDB;
   --color-feature-purple-bg: #F2EBFF;
+  --color-feature-orange: #E8890C;
+  --color-feature-orange-bg: #FFF3E0;
 
   /* Главная и калькулятор оценок */
   --color-label: #758096;
@@ -40,6 +42,10 @@
   --color-formula-bg: #F6F9FC;
   --color-formula-chip: #F0F2F7;
   --color-progress-track: #E0EBE3;
+  --color-icon-muted: #5D5E5E;
+  --color-hint-bg: #F5F0FF;
+  --color-admin: #FFC14D;
+  --color-admin-hover: #F5B02E;
 
   --color-dot-activity: #ED5259;
   --color-dot-labs: #1466ED;
@@ -58,6 +64,22 @@
   --color-grade-poor-bg: #FFEDF0;
   --color-grade-empty: #858FA3;
   --color-grade-empty-bg: #F5F7FA;
+
+  /* Календарь: цвета заметок, линии сетки, сегодняшний день */
+  --color-note-blue: #E8F5FF;
+  --color-note-pink: #FAE8F2;
+  --color-note-green: #E8F7ED;
+  --color-note-yellow: #FCF5D6;
+  --color-note-gray: #F6F6F6;
+  /* Текст на цветной плашке заметки (дата дедлайна) */
+  --color-note-blue-text: #1466ED;
+  --color-note-pink-text: #E52957;
+  --color-note-green-text: #1CA857;
+  --color-note-yellow-text: #B7791F;
+  --color-note-gray-text: #5D5E5E;
+  --color-calendar-weekend: #FAFAFB;
+  --color-calendar-line: #EAEEF6;
+  --color-calendar-today: #FC7676;
 
   --shadow-widget: 0 5px 9px rgba(5, 20, 51, 0.05);
   --shadow-card: 0 8px 24px rgba(5, 20, 51, 0.06);

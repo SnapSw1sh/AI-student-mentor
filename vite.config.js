@@ -1,8 +1,19 @@
-import { defineConfig } from 'vite';
+import { createLogger, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
 
+// Браузер обрывает сокет чата без закрывающего кадра при каждой перезагрузке страницы и
+// переходе в админку, и прокси Vite пишет на это ECONNRESET со стеком. Это не сбой —
+// глушим только этот случай, остальные ошибки прокси видны как раньше.
+const logger = createLogger();
+const logError = logger.error;
+logger.error = (message, options) => {
+  if (options?.error?.code === 'ECONNRESET' && message.includes('ws proxy socket error')) return;
+  logError(message, options);
+};
+
 export default defineConfig({
+  customLogger: logger,
   plugins: [react()],
   resolve: {
     alias: {

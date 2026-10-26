@@ -1,0 +1,95 @@
+/* На узком экране схема не сжимается до нечитаемых подписей, а прокручивается вбок. */
+.scroller {
+  overflow-x: auto;
+}
+
+.plan {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+  font-family: var(--font-primary);
+}
+
+.corridor {
+  fill: var(--color-formula-bg);
+  stroke: var(--color-calendar-line);
+}
+
+.corridorLabel {
+  font-size: 11px;
+  fill: var(--color-label);
+  dominant-baseline: central;
+}
+
+.cell {
+  cursor: pointer;
+}
+
+.cell rect {
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.cell text {
+  font-size: 12px;
+  font-weight: 600;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.room rect {
+  fill: var(--color-surface);
+  stroke: var(--color-field-border);
+}
+
+.room text {
+  fill: var(--color-label);
+  font-weight: 500;
+}
+
+.room:hover rect {
+  fill: var(--color-formula-bg);
+}
+
+.study rect {
+  fill: var(--color-feature-blue-bg);
+  stroke: var(--color-feature-blue-bg);
+}
+
+.study text {
+  fill: var(--color-navy);
+}
+
+.food rect {
+  fill: var(--color-note-yellow);
+  stroke: var(--color-note-yellow);
+}
+
+.food text {
+  fill: var(--color-heading);
+}
+
+.service rect {
+  fill: var(--color-note-green);
+  stroke: var(--color-note-green);
+}
+
+.service text {
+  fill: var(--color-heading);
+}
+
+.selected rect {
+  fill: var(--color-accent);
+  stroke: var(--color-accent);
+}
+
+.selected text {
+  fill: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell rect {
+    transition: none;
+  }
+}

@@ -20,17 +20,11 @@ import { LibraryLayout } from '../features/library/pages/LibraryLayout';
 import { LibraryHomePage } from '../features/library/pages/LibraryHomePage';
 import { LibraryTopicPage } from '../features/library/pages/LibraryTopicPage';
 import { LibraryDocumentPage } from '../features/library/pages/LibraryDocumentPage';
+import { CampusPage } from '../features/campus/pages/CampusPage';
+import { SupportPage } from '../features/support/pages/SupportPage';
+import { CalendarPage } from '../features/planner/pages/CalendarPage';
+import { MaterialsPage } from '../features/materials/pages/MaterialsPage';
 import { AppLayout } from './AppLayout';
-import styles from './Placeholder.module.css';
-
-function Placeholder({ title, text }) {
-  return (
-    <div className={styles.placeholder}>
-      <h1>{title}</h1>
-      <p>{text}</p>
-    </div>
-  );
-}
 
 // Один адрес на два состояния: у «О проекте» нет своего URL, поэтому вошедший пользователь
 // попасть на неё не может, а гость не видит главную.
@@ -84,7 +78,15 @@ export function AppRoutes() {
           path="/materials"
           element={
             <GuestGate title="Материалы" text="Материалы доступны только после входа.">
-              <Placeholder title="Материалы" text="В разработке." />
+              <MaterialsPage />
+            </GuestGate>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <GuestGate title="Календарь" text="Календарь доступен только после входа.">
+              <CalendarPage />
             </GuestGate>
           }
         />
@@ -95,7 +97,7 @@ export function AppRoutes() {
               title="Навигация по кампусу"
               text="Навигация по кампусу доступна только после входа."
             >
-              <Placeholder title="Навигация по кампусу" text="В разработке." />
+              <CampusPage />
             </GuestGate>
           }
         />
@@ -106,7 +108,7 @@ export function AppRoutes() {
               title="Техническая поддержка"
               text="Техническая поддержка доступна только после входа."
             >
-              <Placeholder title="Техническая поддержка" text="В разработке." />
+              <SupportPage />
             </GuestGate>
           }
         />

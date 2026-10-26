@@ -21,19 +21,33 @@ export function AuthProvider({ children }) {
     setHttpToken(token);
   }, []);
 
-  const refresh = useCallback(async () => {
-    try {
-      const data = await authApi.refresh();
-      if (data?.access_token) {
-        setAccessToken(data.access_token);
-        return true;
-      }
-      return false;
-    } catch {
-      setAccessToken(null);
-      setUser(null);
-      return false;
+  const refreshInFlight = useRef(null);
+
+  // Бэк на каждом обновлении выдаёт новый refresh-токен и отзывает старый. Два одновременных
+  // запроса уходят с одной и той же кукой: второй получает 401 и разлогинивает пользователя,
+  // хотя первый прошёл. Так бывает при старте (StrictMode запускает эффект дважды) и когда
+  // несколько запросов страницы разом упираются в просроченный access-токен. Поэтому все
+  // одновременные вызовы ждут один запрос.
+  const refresh = useCallback(() => {
+    if (!refreshInFlight.current) {
+      refreshInFlight.current = (async () => {
+        try {
+          const data = await authApi.refresh();
+          if (data?.access_token) {
+            setAccessToken(data.access_token);
+            return true;
+          }
+          return false;
+        } catch {
+          setAccessToken(null);
+          setUser(null);
+          return false;
+        } finally {
+          refreshInFlight.current = null;
+        }
+      })();
     }
+    return refreshInFlight.current;
   }, [setAccessToken]);
 
   const handleUnauthorized = useCallback(() => {

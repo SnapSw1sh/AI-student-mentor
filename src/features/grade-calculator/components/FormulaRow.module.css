@@ -25,30 +25,6 @@
   color: var(--color-accent);
 }
 
-.weightInput {
-  width: 46px;
-  height: 26px;
-  padding: 0 6px;
-  border: 1px solid var(--color-field-border);
-  border-radius: 6px;
-  background: var(--color-surface);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--color-accent);
-  text-align: center;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.weightInput:hover {
-  border-color: var(--color-border-hover);
-}
-
-.weightInput:focus {
-  border-color: var(--color-focus);
-}
-
 .times,
 .plus {
   font-size: 13px;

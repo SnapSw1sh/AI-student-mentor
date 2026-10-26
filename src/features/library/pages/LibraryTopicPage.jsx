@@ -1,5 +1,6 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useLibrary } from '../hooks/useLibrary';
+import { LibraryBackLink } from '../components/LibraryBackLink';
 import { LibraryBreadcrumbs } from '../components/LibraryBreadcrumbs';
 import { LibraryTopicGrid } from '../components/LibraryTopicGrid';
 import { LibraryDocumentList } from '../components/LibraryDocumentList';
@@ -9,7 +10,6 @@ import styles from './LibraryTopicPage.module.css';
 
 export function LibraryTopicPage() {
   const { topicId } = useParams();
-  const navigate = useNavigate();
   const { status, error, refetch, getTopic, getPath } = useLibrary();
 
   if (status !== 'success') {
@@ -35,9 +35,7 @@ export function LibraryTopicPage() {
   return (
     <div className={styles.page}>
       <div className={styles.topRow}>
-        <button type="button" onClick={() => navigate(-1)} className={styles.back}>
-          ← Назад
-        </button>
+        <LibraryBackLink path={ancestors} />
         <Link to="/library" className={styles.libraryLink}>
           Библиотека
         </Link>

@@ -152,13 +152,71 @@
   gap: 10px;
 }
 
-.sum {
-  font-size: 10px;
+.templateActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.linkButton {
+  padding: 2px 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.linkButton:hover {
+  color: var(--color-navy);
+}
+
+.linkDanger {
   color: var(--color-label);
 }
 
-.sumInvalid {
+.linkDanger:hover {
   color: var(--color-grade-poor);
+}
+
+.linkButton:focus-visible,
+.dangerButton:focus-visible,
+.ghostButton:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.modalText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.dangerButton,
+.ghostButton {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.dangerButton {
+  background: var(--color-grade-poor);
+  color: white;
+}
+
+.dangerButton:hover {
+  filter: brightness(0.92);
+}
+
+.ghostButton {
+  background: var(--color-input-bg);
+  color: var(--color-heading);
+}
+
+.ghostButton:hover {
+  background: var(--color-field-border);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -183,8 +241,7 @@
     font-size: 18px;
   }
   .subtitle,
-  .fieldLabel,
-  .sum {
+  .fieldLabel {
     font-size: 12px;
   }
   .tabs {

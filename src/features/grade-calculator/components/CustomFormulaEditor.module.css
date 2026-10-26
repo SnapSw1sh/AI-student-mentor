@@ -1,0 +1,503 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hint {
+  font-size: 10px;
+  color: var(--color-label);
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.row {
+  --row-columns: 10px minmax(0, 1.3fr) minmax(0, 1fr) 84px 72px 64px;
+
+  min-height: 58px;
+  padding: 9px 20px 9px 10px;
+  background: var(--color-formula-bg);
+  display: grid;
+  grid-template-columns: var(--row-columns);
+  align-items: center;
+  gap: 12px;
+}
+
+.head {
+  min-height: 42px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+.headActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 6px;
+}
+
+.headTrash {
+  width: 14px;
+  height: 14px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dotActivity {
+  background: var(--color-dot-activity);
+}
+
+.dotLabs {
+  background: var(--color-dot-labs);
+}
+
+.dotHomework {
+  background: var(--color-dot-homework);
+}
+
+.dotTests {
+  background: var(--color-dot-tests);
+}
+
+.dotExam {
+  background: var(--color-dot-exam);
+}
+
+.dotNone {
+  background: var(--color-label);
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-heading);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.input:hover {
+  border-color: var(--color-border-hover);
+}
+
+.input:focus {
+  border-color: var(--color-focus);
+}
+
+.inputError,
+.inputError:hover {
+  border-color: var(--color-error);
+}
+
+.cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Подписи полей нужны только на телефоне, где строка заголовков скрыта. */
+.cellLabel {
+  display: none;
+  font-size: 11px;
+  color: var(--color-label);
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.scoreInput {
+  width: 56px;
+  flex-shrink: 0;
+  padding: 0 10px;
+}
+
+.computed {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-input-bg);
+  cursor: default;
+}
+
+.computed:hover {
+  border-color: var(--color-field-border);
+}
+
+.outOf {
+  font-size: 9px;
+  color: var(--color-label);
+  white-space: nowrap;
+}
+
+.contribution {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.iconButton {
+  width: 28px;
+  height: 21px;
+  border-radius: 5px;
+  background: var(--color-tag-bg);
+  color: var(--color-icon-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.iconButton:hover {
+  background: var(--color-border-hover);
+}
+
+.danger {
+  background: transparent;
+  color: var(--color-label);
+}
+
+.danger:hover {
+  background: var(--color-grade-poor-bg);
+  color: var(--color-grade-poor);
+}
+
+.iconButton:focus-visible,
+.addButton:focus-visible,
+.saveButton:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.details {
+  margin-top: 4px;
+  padding: 9px 20px 14px 10px;
+  background: var(--color-formula-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detailsTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.detailsControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 24px;
+}
+
+.selectField {
+  flex: 0 1 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 10px;
+  color: var(--color-label);
+}
+
+.selectBox {
+  position: relative;
+  display: block;
+}
+
+.select {
+  width: 100%;
+  height: 35px;
+  padding: 0 44px 0 20px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-heading);
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.select:focus {
+  border-color: var(--color-focus);
+}
+
+.selectIcon {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 12px;
+  height: 8px;
+  color: var(--color-heading);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.checkbox {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--color-heading);
+  cursor: pointer;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-accent);
+}
+
+.itemRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 84px 28px;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+}
+
+.itemRow .input {
+  height: 30px;
+}
+
+.addButton {
+  align-self: flex-start;
+  min-width: 212px;
+  height: 48px;
+  padding: 0 20px;
+  border: 1.5px dashed var(--color-accent);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  transition: background-color 0.2s ease;
+}
+
+.addButton .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.addButton:hover {
+  background: var(--color-tag-bg);
+}
+
+.addSmall {
+  min-width: 200px;
+  height: 30px;
+  margin-left: 20px;
+}
+
+.summary {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 30px;
+}
+
+.sumLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.sumValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.statusOk,
+.statusBad {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.statusOk {
+  color: var(--color-grade-excellent);
+}
+
+.statusBad {
+  color: var(--color-grade-poor);
+}
+
+.statusIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.save {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-field-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.saveRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nameInput {
+  flex: 1 1 260px;
+  max-width: 360px;
+  font-size: 12px;
+}
+
+.saveButton {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: var(--color-navy);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton:hover {
+  background: var(--color-primary);
+}
+
+.error {
+  min-height: 14px;
+  font-size: 11px;
+  color: var(--color-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .iconButton,
+  .addButton,
+  .saveButton {
+    transition: none;
+  }
+}
+
+/* На узком экране строка складывается в две: название и действия сверху,
+   коэффициент, оценка и вклад снизу. Заголовок колонок тогда не нужен. */
+@media (max-width: 640px) {
+  .head {
+    display: none;
+  }
+  .row {
+    grid-template-columns: 10px minmax(0, 1fr) minmax(0, 1fr) 64px;
+    grid-template-areas:
+      'dot name name actions'
+      '. weight score contribution';
+    row-gap: 8px;
+  }
+  .row > :nth-child(1) {
+    grid-area: dot;
+  }
+  .row > :nth-child(2) {
+    grid-area: name;
+  }
+  .row > :nth-child(3) {
+    grid-area: weight;
+  }
+  .row > :nth-child(4) {
+    grid-area: score;
+  }
+  .row > :nth-child(5) {
+    grid-area: contribution;
+    align-items: flex-end;
+  }
+  .cellLabel {
+    display: block;
+  }
+  .contribution {
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+  .row > :nth-child(6) {
+    grid-area: actions;
+  }
+  .itemRow {
+    padding-left: 0;
+  }
+  .addSmall {
+    margin-left: 0;
+  }
+  .input,
+  .select,
+  .checkbox {
+    font-size: 14px;
+  }
+  .hint,
+  .label,
+  .sumLabel,
+  .statusOk,
+  .statusBad {
+    font-size: 12px;
+  }
+  .addButton,
+  .saveButton {
+    font-size: 13px;
+  }
+  .nameInput {
+    max-width: none;
+  }
+  .saveButton {
+    flex: 1 1 100%;
+  }
+}

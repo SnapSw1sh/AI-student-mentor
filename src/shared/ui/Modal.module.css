@@ -1,0 +1,114 @@
+/* margin: auto центрирует <dialog> в верхнем слое; глобальный сброс margin: 0 это ломал. */
+.dialog {
+  margin: auto;
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 20px 50px rgba(5, 20, 51, 0.2);
+  font-family: var(--font-primary);
+  color: var(--color-heading);
+}
+
+.small {
+  width: min(380px, calc(100vw - 32px));
+}
+
+.dialog::backdrop {
+  background: rgba(9, 14, 28, 0.4);
+}
+
+.dialog[open] {
+  animation: modal-in 0.18s ease-out;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 32px);
+}
+
+.header {
+  padding: 20px 20px 0 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  padding-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.close {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  color: var(--color-label);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.close:hover {
+  background: var(--color-input-bg);
+  color: var(--color-heading);
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.closeIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.body {
+  padding: 16px 24px;
+  overflow-y: auto;
+}
+
+.footer {
+  padding: 4px 24px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open] {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 16px 12px 0 16px;
+  }
+  .body {
+    padding: 14px 16px;
+  }
+  .footer {
+    padding: 4px 16px 18px;
+  }
+}

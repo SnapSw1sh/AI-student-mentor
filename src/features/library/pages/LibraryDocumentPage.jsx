@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { libraryApi } from '../api/libraryApi';
 import { ApiError } from '../../../shared/api/httpClient';
 import { useLibrary } from '../hooks/useLibrary';
+import { LibraryBackLink } from '../components/LibraryBackLink';
 import { LibraryBreadcrumbs } from '../components/LibraryBreadcrumbs';
 import { LibraryDocumentPreview } from '../components/LibraryDocumentPreview';
 import { LibraryRelatedDocuments } from '../components/LibraryRelatedDocuments';
@@ -68,6 +69,7 @@ export function LibraryDocumentPage() {
 
   return (
     <div className={styles.page}>
+      <LibraryBackLink path={breadcrumbPath} />
       <LibraryBreadcrumbs path={breadcrumbPath} />
       <h2 className={styles.title}>{document.title}</h2>
 

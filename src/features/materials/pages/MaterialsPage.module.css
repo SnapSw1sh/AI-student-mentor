@@ -1,0 +1,224 @@
+.page {
+  width: 100%;
+  max-width: 1323px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: var(--font-primary);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-label);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchField {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  padding: 0 18px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.searchField:focus-within {
+  border-color: var(--color-focus);
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-label);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-heading);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--color-placeholder);
+}
+
+.searchButton {
+  height: 52px;
+  padding: 0 32px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--color-navy);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background: var(--color-primary);
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.course {
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-navy);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.course:hover {
+  background: var(--color-formula-bg);
+}
+
+.courseActive,
+.courseActive:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: white;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resetLink {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.resetLink:hover {
+  text-decoration: underline;
+}
+
+.typeField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.typeLabel {
+  font-size: 11px;
+  color: var(--color-label);
+}
+
+.typeSelect {
+  min-width: 180px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 13px;
+  color: var(--color-heading);
+  cursor: pointer;
+}
+
+.typeSelect:focus {
+  outline: none;
+  border-color: var(--color-focus);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+
+.note,
+.empty {
+  font-size: 13px;
+  color: var(--color-label);
+}
+
+.empty {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.searchButton:focus-visible,
+.course:focus-visible,
+.resetLink:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .searchField,
+  .searchButton,
+  .course {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+  }
+  .searchButton {
+    padding: 0 18px;
+  }
+  .filters,
+  .typeField,
+  .typeSelect {
+    width: 100%;
+  }
+}

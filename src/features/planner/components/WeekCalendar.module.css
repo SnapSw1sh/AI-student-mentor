@@ -1,0 +1,471 @@
+.card {
+  padding: 28px 34px 30px 26px;
+  border: 1px solid var(--color-widget-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: var(--font-primary);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.caption {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--color-label);
+}
+
+.range {
+  margin-top: 19px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navButton {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--color-calendar-line);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.navButton:hover {
+  background: var(--color-formula-bg);
+}
+
+.today {
+  padding: 0 12px;
+  border-color: transparent;
+  background: var(--color-tag-bg);
+  color: var(--color-navy);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.today:hover {
+  background: var(--color-border-hover);
+}
+
+.navIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.navButton:focus-visible,
+.addButton:focus-visible,
+.note:focus-visible,
+.more:focus-visible,
+.dayListAdd:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  font-size: 10px;
+  color: var(--color-label);
+  text-align: center;
+}
+
+.weekdays span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Одна сетка на всю неделю: столбцы-дни лежат фоном на всю высоту, заметки — поверх
+   в своих строках, многодневные растягиваются через несколько столбцов. */
+.grid {
+  min-height: 286px;
+  border: 1px solid var(--color-calendar-line);
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: 32px repeat(5, 40px) minmax(24px, 1fr);
+  row-gap: 0;
+}
+
+.column {
+  grid-row: 1 / -1;
+  border-left: 1px solid var(--color-calendar-line);
+}
+
+.column:first-child {
+  border-left: 0;
+}
+
+.dayHead {
+  grid-row: 1;
+  padding: 6px 8px 0 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.addButton {
+  width: 22px;
+  height: 19px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: var(--color-input-bg);
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.addButton:hover {
+  background: var(--color-tag-bg);
+  color: var(--color-accent);
+}
+
+.addIcon {
+  width: 11px;
+  height: 11px;
+}
+
+.dayNumber {
+  min-width: 22px;
+  height: 20px;
+  padding: 0 4px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dayToday {
+  background: var(--color-calendar-today);
+  color: var(--color-heading);
+  font-size: 12px;
+}
+
+.note {
+  background: var(--note-bg);
+  align-self: center;
+  height: 34px;
+  margin: 0 3px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-heading);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  z-index: 1;
+  transition: filter 0.2s ease;
+}
+
+.note:hover {
+  filter: brightness(0.96);
+}
+
+/* Полоса заметки в сетке недели: заголовок и ручки по краям для растягивания. */
+.grid .note {
+  position: relative;
+  display: flex;
+  align-items: center;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.noteTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.handleStart,
+.handleEnd {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: ew-resize;
+}
+
+.handleStart {
+  left: 0;
+}
+
+.handleEnd {
+  right: 0;
+}
+
+.handleStart::after,
+.handleEnd::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  left: 3px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-icon-muted);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.note:hover .handleStart::after,
+.note:hover .handleEnd::after {
+  opacity: 0.35;
+}
+
+.dragSource {
+  opacity: 0.35;
+}
+
+.ghost {
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: 0 6px 16px rgba(5, 20, 51, 0.16);
+  outline: 1.5px dashed var(--color-accent);
+  outline-offset: -1.5px;
+}
+
+.gridMoving,
+.gridMoving * {
+  cursor: grabbing;
+}
+
+.gridResizing,
+.gridResizing * {
+  cursor: ew-resize;
+}
+
+.gridMoving,
+.gridResizing {
+  user-select: none;
+}
+
+.cutStart {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.cutEnd {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.more {
+  align-self: end;
+  justify-self: start;
+  margin: 0 0 6px 4px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 9px;
+  color: var(--color-label);
+  z-index: 1;
+}
+
+.more:hover {
+  color: var(--color-accent);
+  background: var(--color-tag-bg);
+}
+
+.agenda {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agendaDay {
+  padding: 10px 12px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agendaHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.agendaHead .addButton {
+  width: 32px;
+  height: 28px;
+}
+
+.agendaDate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.agendaToday {
+  color: var(--color-error);
+}
+
+.todayBadge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--color-error);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.agendaNotes,
+.dayList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agendaNote {
+  align-self: stretch;
+  align-items: flex-start;
+  height: auto;
+  min-height: 40px;
+  margin: 0;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  font-size: 13px;
+  white-space: normal;
+}
+
+.noteDates {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.agendaEmpty {
+  font-size: 12px;
+  color: var(--color-placeholder);
+}
+
+.dayListAdd {
+  height: 40px;
+  margin-top: 4px;
+  border: 1.5px dashed var(--color-accent);
+  border-radius: 10px;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dayListAdd:hover {
+  background: var(--color-tag-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navButton,
+  .addButton,
+  .note,
+  .handleStart::after,
+  .handleEnd::after {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .weekdays {
+    font-size: 9px;
+  }
+  .note {
+    padding: 0 8px;
+    font-size: 10px;
+  }
+}
+
+/* На телефоне семь столбцов не читаются — показываем неделю списком по дням. */
+@media (max-width: 640px) {
+  .card {
+    padding: 20px 16px;
+  }
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .caption {
+    font-size: 12px;
+  }
+  .range {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .navButton {
+    height: 38px;
+    min-width: 38px;
+  }
+  .today {
+    font-size: 13px;
+  }
+  .week {
+    display: none;
+  }
+  .agenda {
+    display: flex;
+  }
+}

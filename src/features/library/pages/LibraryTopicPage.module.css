@@ -16,20 +16,6 @@
   width: 100%;
 }
 
-.back {
-  border: none;
-  background: transparent;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  font-family: inherit;
-  cursor: pointer;
-  padding: 0;
-}
-
-.back:hover {
-  color: var(--color-primary);
-}
-
 .libraryLink {
   color: var(--color-text-muted);
   font-size: 13px;

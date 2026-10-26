@@ -1,0 +1,280 @@
+.page {
+  width: 100%;
+  max-width: 1323px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: var(--font-primary);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-label);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  align-items: start;
+  gap: 30px;
+}
+
+.panel,
+.map {
+  padding: 24px 20px;
+  border: 1px solid var(--color-widget-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-widget);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.search:focus-within {
+  border-color: var(--color-focus);
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-label);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--color-heading);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--color-placeholder);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 15px;
+  background: var(--color-input-bg);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-label);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.chip:hover {
+  color: var(--color-heading);
+}
+
+.chipActive,
+.chipActive:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+.chip:focus-visible,
+.item:focus-visible,
+.floor:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--color-input-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.item:hover {
+  background: var(--color-formula-chip);
+}
+
+.itemActive,
+.itemActive:hover {
+  background: var(--color-tag-bg);
+}
+
+.itemTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.itemMeta {
+  font-size: 11px;
+  color: var(--color-muted-2);
+}
+
+.empty {
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--color-label);
+  text-align: center;
+}
+
+.map {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mapHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.selection {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.floors {
+  display: flex;
+  gap: 6px;
+}
+
+.floor {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-navy);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.floor:hover {
+  background: var(--color-formula-bg);
+}
+
+.floorActive,
+.floorActive:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: white;
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 12px;
+  color: var(--color-label);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend li::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.legendStudy::before {
+  background: var(--color-feature-blue-bg);
+}
+
+.legendFood::before {
+  background: var(--color-note-yellow);
+}
+
+.legendService::before {
+  background: var(--color-note-green);
+}
+
+.legend .legendRoom::before {
+  background: var(--color-surface);
+  border-color: var(--color-field-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search,
+  .chip,
+  .item,
+  .floor {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+  }
+  .panel,
+  .map {
+    padding: 20px 16px;
+  }
+}

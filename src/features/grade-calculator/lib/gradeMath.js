@@ -47,13 +47,35 @@ export function createEmptyScores(components) {
   );
 }
 
+// Как несколько оценок компонента (ЛР, ДЗ, тесты) сворачиваются в одну. Округление вниз
+// применяется к среднему, а не к каждой оценке.
+export const AGGREGATES = [
+  { id: 'mean', label: 'Среднее арифметическое' },
+  { id: 'floor', label: 'Среднее с округлением вниз' },
+  { id: 'floorBelow4', label: 'От 4 — среднее, ниже 4 — округление вниз' },
+];
+
+const mean = (values) => values.reduce((sum, v) => sum + v, 0) / values.length;
+
+// Неизвестный способ (например, из шаблона, сохранённого старой версией) считается средним.
+function aggregate(values, mode) {
+  if (values.length === 0) return null;
+  const avg = mean(values);
+  if (mode === 'floor') return Math.floor(avg);
+  if (mode === 'floorBelow4') return avg >= 4 ? avg : Math.floor(avg);
+  return avg;
+}
+
 export function componentScore(component, raw) {
   if (!component.items) return { value: parseGrade(raw) };
 
   const values = Array.from({ length: component.items.count }, (_, i) => parseGrade(raw?.[i]))
     .filter((v) => v !== null);
-  const value = values.length ? values.reduce((sum, v) => sum + v, 0) / values.length : null;
-  return { value, filled: values.length, total: component.items.count };
+  return {
+    value: aggregate(values, component.items.aggregate),
+    filled: values.length,
+    total: component.items.count,
+  };
 }
 
 export function weightsSum(weights) {

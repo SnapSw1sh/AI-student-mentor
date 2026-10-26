@@ -1,0 +1,18 @@
+.notice {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--color-hint-bg);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-feature-purple);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

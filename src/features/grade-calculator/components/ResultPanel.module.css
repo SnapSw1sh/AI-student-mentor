@@ -244,6 +244,26 @@
   outline-offset: 2px;
 }
 
+.note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--color-hint-bg);
+  color: var(--color-accent);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.noteIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .panel,
   .value,

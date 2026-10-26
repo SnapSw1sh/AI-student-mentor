@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { InfoIcon } from '../../../shared/ui/icons';
 import { MAX_GRADE, formatGrade, formatPreciseGrade } from '../lib/gradeMath';
 import styles from './ResultPanel.module.css';
 
@@ -23,6 +24,7 @@ function totalCaption(result) {
 export function ResultPanel({
   result,
   emptyMessage,
+  note,
   mode,
   onModeChange,
   target,
@@ -88,6 +90,13 @@ export function ResultPanel({
       >
         Посчитать
       </button>
+
+      {note && (
+        <p className={styles.note}>
+          <InfoIcon className={styles.noteIcon} />
+          {note}
+        </p>
+      )}
     </div>
   );
 }

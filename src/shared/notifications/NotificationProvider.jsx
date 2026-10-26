@@ -14,21 +14,25 @@ export function NotificationProvider({ children }) {
   }, []);
 
   // Одинаковое уведомление не дублируется: повторная ошибка (например, двойной клик по
-  // «Скачать») перезапускает таймер уже показанного.
-  const push = useCallback((type, title, text) => {
+  // «Скачать») перезапускает таймер уже показанного. `key` заменяет предыдущее уведомление
+  // того же действия, даже если текст другой (например, «Заметка перенесена» на каждый шаг).
+  // `action` — кнопка в уведомлении: { label, onClick }, после нажатия уведомление закрывается.
+  const push = useCallback((type, title, text, { key, action } = {}) => {
     nextId.current += 1;
     const id = nextId.current;
     setToasts((list) => {
-      const rest = list.filter((t) => !(t.type === type && t.title === title && t.text === text));
-      return [...rest, { id, type, title, text }].slice(-MAX_VISIBLE);
+      const rest = list.filter((t) =>
+        key ? t.key !== key : !(t.type === type && t.title === title && t.text === text),
+      );
+      return [...rest, { id, type, title, text, key, action }].slice(-MAX_VISIBLE);
     });
   }, []);
 
   const value = useMemo(
     () => ({
       error: (title, error) => push('error', title, error === undefined ? '' : describeError(error)),
-      success: (title, text = '') => push('success', title, text),
-      info: (title, text = '') => push('info', title, text),
+      success: (title, text = '', options) => push('success', title, text, options),
+      info: (title, text = '', options) => push('info', title, text, options),
     }),
     [push],
   );

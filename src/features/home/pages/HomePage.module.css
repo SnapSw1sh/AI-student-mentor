@@ -7,38 +7,16 @@
   font-family: var(--font-primary);
 }
 
-.frame {
-  border: 1px solid var(--color-widget-border);
-  border-radius: 16px;
-  background: var(--color-surface);
-  box-shadow: var(--shadow-widget);
-}
-
-.frameTitle {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-heading);
-}
-
 .topRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 254px) minmax(0, 254px) minmax(0, 649px);
+  justify-content: space-between;
   align-items: center;
-  gap: 76px;
+  gap: 30px;
 }
 
-.shortcuts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-}
-
-.shortcut {
-  height: 71px;
-}
-
-.banner {
-  height: 98px;
+.ask {
+  min-width: 0;
 }
 
 .middleRow,
@@ -48,8 +26,7 @@
   gap: 30px;
 }
 
-/* По макету слева от «Материалов» пустое место без рамки — под блок, которого ещё нет. */
-.reserved {
+.calendar {
   flex: 1;
   min-width: 0;
 }
@@ -57,8 +34,6 @@
 .materials {
   width: 349px;
   flex-shrink: 0;
-  min-height: 432px;
-  padding: 36px 24px;
 }
 
 .calculator {
@@ -69,23 +44,24 @@
 .deadlines {
   width: 241px;
   flex-shrink: 0;
-  min-height: 401px;
-  padding: 19px 20px;
+}
+
+@media (max-width: 1240px) {
+  .topRow {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px;
+  }
+  .ask {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 1200px) {
-  .topRow {
-    gap: 30px;
-  }
-  .shortcuts {
-    gap: 20px;
-  }
   .bottomRow {
     flex-direction: column;
   }
   .deadlines {
     width: 100%;
-    min-height: 200px;
   }
 }
 
@@ -93,18 +69,14 @@
   .page {
     gap: 24px;
   }
-  .topRow {
-    grid-template-columns: minmax(0, 1fr);
-  }
   .middleRow {
     flex-direction: column;
   }
-  .reserved {
-    display: none;
+  .calendar {
+    flex: none;
   }
   .materials {
     width: 100%;
-    min-height: 240px;
   }
 }
 
@@ -112,14 +84,8 @@
   .page {
     gap: 16px;
   }
-  .shortcuts {
-    gap: 10px;
-  }
-  .materials,
-  .deadlines {
-    padding: 20px 16px;
-  }
-  .frameTitle {
-    font-size: 18px;
+  .topRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 }

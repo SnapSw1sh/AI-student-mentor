@@ -123,7 +123,7 @@ function ItemsPanel({ id, component, raw, onItemChange }) {
           return (
             <div key={itemId} className={styles.item}>
               <label htmlFor={itemId} className={styles.itemLabel}>
-                {component.items.itemLabel} {index + 1}
+                {component.items.names?.[index] || `${component.items.itemLabel} ${index + 1}`}
               </label>
               <span className={`${styles.box} ${styles.itemBox}`}>
                 <input

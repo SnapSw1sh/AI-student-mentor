@@ -40,12 +40,17 @@ pnpm run lint      # ESLint
 
 ## Запуск локально (фронт + бэк)
 
-1. Поднять бэк:
+1. Поднять бэк. Он лежит в `backend-con/` — это клон основного репозитория бэка (ветка `dev`) со всеми сервисами-сабмодулями; подробно — `backend-con/deploy.md`.
    ```bash
-   cd backend-con/pochemuchnic-miem-prj
-   cp .env.example .env   # если .env ещё нет — там уже подставлены рабочие дефолты (для каждой папки если что)
-   docker compose up -d
-   docker compose up -d --build   # для сброки образа, если его нет
+   # первый раз: клон (SSH-ссылки сабмодулей подменяются на HTTPS одной настройкой git)
+   git config --global url."https://github.com/".insteadOf git@github.com:
+   git clone -b dev --recurse-submodules https://github.com/nedloz/pochemuchnic-miem-prj.git backend-con
+   cd backend-con
+   cp .env.example .env                      # и .env.example → .env в каждой папке services/*
+   python scripts/gen_service_tokens.py      # межсервисные токены, без них сервисы не стартуют
+
+   docker compose up -d --build
+   docker compose restart library-svc        # пока не исправлен PROBLEMS.md#24
    ```
    Nginx поднимается на `:80`. Проверка: `curl http://localhost/ping` → `pong`.
 
@@ -62,7 +67,7 @@ pnpm run lint      # ESLint
 ```bash
 docker compose down     # остановить, данные сохранятся
 docker compose down -v  # остановить и удалить все данные локально (БД, MinIO и т.д.)
-docker compose logs auth-svc  # посмотреть логи (например, ссылки верификации email)
+docker compose logs auth-svc  # посмотреть логи сервиса
 docker compose ps       # проверить, что все контейнеры в статусе `Up` / `healthy`
 ```
 

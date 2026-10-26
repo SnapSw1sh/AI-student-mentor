@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { AdminPanelButton } from '../features/auth/components/AdminPanelButton';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { AvatarPlaceholderIcon, CloseIcon, MenuIcon } from '../shared/ui/icons';
 import { Logo } from '../shared/ui/Logo';
@@ -77,9 +78,12 @@ export function Header({ collapsed = false }) {
 
           <div className={styles.actions}>
             {isAuthenticated ? (
-              <Link to="/profile" className={styles.avatar} aria-label="Профиль">
-                <AvatarPlaceholderIcon className={styles.avatarIcon} />
-              </Link>
+              <>
+                <AdminPanelButton />
+                <Link to="/profile" className={styles.avatar} aria-label="Профиль">
+                  <AvatarPlaceholderIcon className={styles.avatarIcon} />
+                </Link>
+              </>
             ) : (
               <Link to="/login" className={styles.loginButton}>
                 Войти

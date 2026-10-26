@@ -54,6 +54,18 @@ function Toast({ toast, onDismiss }) {
         <p className={styles.title}>{toast.title}</p>
         {toast.text && <p className={styles.text}>{toast.text}</p>}
       </div>
+      {toast.action && (
+        <button
+          type="button"
+          className={styles.action}
+          onClick={() => {
+            toast.action.onClick();
+            onDismiss();
+          }}
+        >
+          {toast.action.label}
+        </button>
+      )}
       <button type="button" className={styles.close} onClick={onDismiss} aria-label="Закрыть уведомление">
         <CloseIcon className={styles.closeIcon} />
       </button>

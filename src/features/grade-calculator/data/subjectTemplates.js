@@ -32,6 +32,3 @@ export const SUBJECT_TEMPLATES = [
     ],
   },
 ];
-
-// «Своя формула» пока повторяет состав «Баз данных», меняются только коэффициенты.
-export const CUSTOM_COMPONENTS = SUBJECT_TEMPLATES[0].components;

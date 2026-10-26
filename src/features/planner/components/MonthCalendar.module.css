@@ -1,0 +1,494 @@
+.calendar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-primary);
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* В ленте шапка с месяцем и днями недели закреплена, а недели прокручиваются под ней. */
+/* Прилипает к самому верху области прокрутки, а не к её внутреннему отступу: иначе в полосе
+   отступа над шапкой были бы видны прокручиваемые недели. Отрицательный margin возвращает
+   шапку на место в непрокрученном состоянии. */
+.feed .top {
+  position: sticky;
+  top: calc(-1 * var(--main-pad-top, 0px));
+  z-index: 5;
+  margin-top: calc(-1 * var(--main-pad-top, 0px));
+  padding: var(--main-pad-top, 0px) 0 8px;
+  background: var(--color-surface);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.monthLabel {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.views {
+  padding: 3px;
+  border-radius: 9px;
+  background: var(--color-input-bg);
+  display: flex;
+}
+
+.viewButton {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-label);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.viewButton:hover {
+  color: var(--color-heading);
+}
+
+.viewActive,
+.viewActive:hover {
+  background: var(--color-surface);
+  color: var(--color-heading);
+  box-shadow: 0 1px 3px rgba(5, 20, 51, 0.12);
+}
+
+.sentinel {
+  height: 1px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.create {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: var(--color-navy);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.create:hover {
+  background: var(--color-primary);
+}
+
+.createIcon {
+  width: 11px;
+  height: 11px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navButton {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--color-calendar-line);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.navButton:hover {
+  background: var(--color-formula-bg);
+}
+
+.today {
+  padding: 0 12px;
+  border-color: transparent;
+  background: var(--color-tag-bg);
+  color: var(--color-navy);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.today:hover {
+  background: var(--color-border-hover);
+}
+
+.navIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  font-size: 11px;
+  color: var(--color-label);
+  text-align: center;
+}
+
+/* Привязку прокрутки браузера в ленте отключаем: иначе при подгрузке недель снизу он держит
+   экран у нижнего края, тот снова виден — и лента подгружается без конца. Сдвиг при
+   подгрузке сверху компенсируем сами. */
+.feed {
+  overflow-anchor: none;
+}
+
+.month {
+  border: 1px solid var(--color-calendar-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+/* Неделя — своя сетка: строка числа, до четырёх строк заметок (пустые схлопываются) и
+   строка «ещё N». Дни растянуты на все строки и лежат под заметками. Высота недели — по
+   высоте окна, чтобы шесть недель месяца занимали экран, но не меньше 118 px. */
+.week {
+  min-height: max(118px, calc((100dvh - 280px) / 6));
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: 32px repeat(4, auto) minmax(22px, 1fr);
+}
+
+.week + .week {
+  border-top: 1px solid var(--color-calendar-line);
+}
+
+.day {
+  grid-row: 1 / -1;
+  min-width: 0;
+  position: relative;
+}
+
+.day + .day {
+  border-left: 1px solid var(--color-calendar-line);
+}
+
+.weekend {
+  background: var(--color-calendar-weekend);
+}
+
+.dayHead {
+  height: 32px;
+  padding: 6px 8px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.add {
+  width: 22px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: var(--color-input-bg);
+  color: var(--color-icon-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease, background-color 0.2s ease;
+}
+
+.day:hover .add,
+.add:focus-visible {
+  opacity: 1;
+}
+
+/* Без мыши наведения нет — «+» виден всегда. */
+@media (hover: none) {
+  .add {
+    opacity: 1;
+  }
+}
+
+.add:hover {
+  background: var(--color-field-border);
+}
+
+.addIcon {
+  width: 10px;
+  height: 10px;
+}
+
+.dayNumber {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.outside .dayNumber {
+  color: var(--color-placeholder);
+  font-weight: 500;
+}
+
+.dayToday,
+.outside .dayToday {
+  background: var(--color-calendar-today);
+  color: white;
+}
+
+.dayButton {
+  display: none;
+}
+
+.note {
+  position: relative;
+  align-self: start;
+  height: 24px;
+  margin: 0 4px 4px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: var(--note-bg);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-heading);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 1;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  user-select: none;
+  transition: filter 0.2s ease;
+}
+
+.note:hover {
+  filter: brightness(0.96);
+}
+
+.cutStart {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.cutEnd {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.noteTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.handleStart,
+.handleEnd {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: ew-resize;
+}
+
+.handleStart {
+  left: 0;
+}
+
+.handleEnd {
+  right: 0;
+}
+
+.handleStart::after,
+.handleEnd::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 3px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-icon-muted);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.note:hover .handleStart::after,
+.note:hover .handleEnd::after {
+  opacity: 0.35;
+}
+
+.dragSource {
+  opacity: 0.35;
+}
+
+.ghost {
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: 0 6px 16px rgba(5, 20, 51, 0.16);
+  outline: 1.5px dashed var(--color-accent);
+  outline-offset: -1.5px;
+}
+
+.moving,
+.moving * {
+  cursor: grabbing;
+}
+
+.resizing,
+.resizing * {
+  cursor: ew-resize;
+}
+
+.moving,
+.resizing {
+  user-select: none;
+}
+
+.more {
+  align-self: start;
+  justify-self: start;
+  margin: 0 0 4px 6px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--color-label);
+  z-index: 1;
+}
+
+.more:hover {
+  color: var(--color-accent);
+  background: var(--color-tag-bg);
+}
+
+.viewButton:focus-visible,
+.create:focus-visible,
+.navButton:focus-visible,
+.add:focus-visible,
+.note:focus-visible,
+.more:focus-visible,
+.dayButton:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .create,
+  .navButton,
+  .add,
+  .note,
+  .handleStart::after,
+  .handleEnd::after {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .note {
+    padding: 0 6px;
+    font-size: 11px;
+  }
+}
+
+/* На телефоне полосы не читаются: в дне только число и цветные точки заметок, по нажатию —
+   список дня. Перетаскивания здесь нет. */
+@media (max-width: 640px) {
+  .title {
+    font-size: 22px;
+  }
+  .header {
+    align-items: flex-start;
+  }
+  .toolbar {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .week {
+    min-height: 0;
+    grid-template-rows: 56px;
+  }
+  .dayHead,
+  .note,
+  .ghost,
+  .more {
+    display: none;
+  }
+  .dayButton {
+    width: 100%;
+    height: 100%;
+    padding: 6px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .dayButtonNumber {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .outside .dayButtonNumber {
+    color: var(--color-placeholder);
+  }
+  .dayButtonNumber.dayToday {
+    color: white;
+  }
+  .dots {
+    display: flex;
+    gap: 3px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--note-text);
+  }
+}
