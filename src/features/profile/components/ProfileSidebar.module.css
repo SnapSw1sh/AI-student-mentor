@@ -18,6 +18,10 @@
   gap: 16px;
 }
 
+.avatarWrap {
+  position: relative;
+}
+
 .avatar {
   position: relative;
   width: 150px;
@@ -32,10 +36,6 @@
   cursor: pointer;
   overflow: hidden;
   transition: filter 0.2s ease;
-}
-
-.avatar:hover {
-  filter: brightness(0.96);
 }
 
 .avatarIcon {
@@ -54,6 +54,83 @@
 
 .fileInput {
   display: none;
+}
+
+/* «Изменить» поверх фото — при наведении и фокусе с клавиатуры. */
+.avatarOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(9, 14, 28, 0.5);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.avatar:hover .avatarOverlay,
+.avatar:focus-visible .avatarOverlay,
+.avatar[aria-expanded='true'] .avatarOverlay {
+  opacity: 1;
+}
+
+.avatar:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.overlayIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.avatarMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  min-width: 200px;
+  padding: 6px;
+  border: 1px solid var(--color-field-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-preview);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menuItem {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-heading);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: var(--color-input-bg);
+  outline: none;
+}
+
+.menuItemDanger {
+  color: var(--color-error);
+}
+
+.avatarBusy {
+  cursor: progress;
+  opacity: 0.6;
 }
 
 .avatarError {
@@ -132,5 +209,11 @@
   }
   .menu {
     width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatarOverlay {
+    transition: none;
   }
 }

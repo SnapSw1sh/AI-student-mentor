@@ -11,6 +11,14 @@ import { EmailField } from '../components/EmailField';
 import { PasswordField } from '../components/PasswordField';
 import authStyles from '../components/authStyles.module.css';
 
+// TODO(backend): PROBLEMS.md#25, #26 — бэк сохраняет аккаунт и только потом отвечает 503, если
+// письмо не ушло; отправить его повторно с фронта пока нельзя. Узнаём этот случай по тексту
+// ответа: обычный 503 (сервис лежит) аккаунт не создаёт, и там уместно «попробуйте позже».
+const isAccountCreatedWithoutEmail = (err) =>
+  err instanceof ApiError &&
+  err.status === 503 &&
+  /account created/i.test(err.body?.detail ?? '');
+
 export function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,6 +69,11 @@ export function RegisterPage() {
       if (err instanceof ApiError && (err.status === 409 || err.status === 400)) {
         setError('Пользователь с такой почтой уже зарегистрирован.');
         setErrorField('email');
+      } else if (isAccountCreatedWithoutEmail(err)) {
+        setError(
+          'Аккаунт создан, но письмо для подтверждения почты не отправилось. Регистрироваться ' +
+            'заново не нужно — напишите в поддержку, вам помогут подтвердить почту.',
+        );
       } else {
         setError('Не удалось зарегистрироваться. Попробуйте позже.');
       }

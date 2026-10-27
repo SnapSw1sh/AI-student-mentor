@@ -1,4 +1,4 @@
-import { ApiError } from '../api/httpClient';
+import { ApiError, IncompleteDownloadError } from '../api/httpClient';
 
 // Ошибка, текст которой можно показать пользователю как есть.
 export class UserFacingError extends Error {
@@ -17,6 +17,9 @@ const isNetworkError = (error) =>
 export function describeError(error) {
   if (error instanceof UserFacingError) return error.message;
   if (isNetworkError(error)) return NETWORK_ERROR;
+  if (error instanceof IncompleteDownloadError) {
+    return 'Файл скачался не полностью — соединение прервалось. Попробуйте ещё раз.';
+  }
   if (error instanceof ApiError) {
     if (error.status === 401) return 'Сессия истекла — войдите снова.';
     if (error.status === 403) return 'Недостаточно прав для этого действия.';

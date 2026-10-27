@@ -117,6 +117,17 @@ export function AuthProvider({ children }) {
     return profile;
   }, []);
 
+  const uploadAvatar = useCallback(async (file) => {
+    const profile = await authApi.uploadAvatar(file);
+    setUser(profile);
+    return profile;
+  }, []);
+
+  const removeAvatar = useCallback(async () => {
+    await authApi.deleteAvatar();
+    setUser((current) => (current ? { ...current, avatar_url: null } : current));
+  }, []);
+
   const value = useMemo(
     () => ({
       accessToken,
@@ -128,6 +139,8 @@ export function AuthProvider({ children }) {
       refresh,
       refreshProfile,
       updateProfile,
+      uploadAvatar,
+      removeAvatar,
     }),
     [
       accessToken,
@@ -138,6 +151,8 @@ export function AuthProvider({ children }) {
       refresh,
       refreshProfile,
       updateProfile,
+      uploadAvatar,
+      removeAvatar,
     ],
   );
 

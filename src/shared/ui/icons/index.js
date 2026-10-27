@@ -42,3 +42,4 @@ export { NoteIcon } from './NoteIcon';
 export { LinkIcon } from './LinkIcon';
 export { PlayIcon } from './PlayIcon';
 export { UsersIcon } from './UsersIcon';
+export { CameraIcon } from './CameraIcon';

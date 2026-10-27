@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { LoginPage } from '../features/auth/pages/LoginPage';
 import { RegisterPage } from '../features/auth/pages/RegisterPage';
@@ -11,20 +12,26 @@ import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
 import { GuestGate } from '../features/auth/components/GuestGate';
 import { useAuth } from '../features/auth/hooks/useAuth';
-import { HomePage } from '../features/home/pages/HomePage';
-import { AboutPage } from '../features/about/pages/AboutPage';
-import { ProfilePage } from '../features/profile/pages/ProfilePage';
-import { ChatPage } from '../features/chat/pages/ChatPage';
-import { LibraryProvider } from '../features/library/context/LibraryProvider';
-import { LibraryLayout } from '../features/library/pages/LibraryLayout';
-import { LibraryHomePage } from '../features/library/pages/LibraryHomePage';
-import { LibraryTopicPage } from '../features/library/pages/LibraryTopicPage';
-import { LibraryDocumentPage } from '../features/library/pages/LibraryDocumentPage';
-import { CampusPage } from '../features/campus/pages/CampusPage';
-import { SupportPage } from '../features/support/pages/SupportPage';
-import { CalendarPage } from '../features/planner/pages/CalendarPage';
-import { MaterialsPage } from '../features/materials/pages/MaterialsPage';
 import { AppLayout } from './AppLayout';
+
+// Разделы приложения загружаются при первом переходе в них, а не все сразу при открытии сайта.
+// Страницы входа и регистрации остаются в основном файле: с них начинает новый пользователь.
+const lazyNamed = (load, name) => lazy(() => load().then((module) => ({ default: module[name] })));
+
+const HomePage = lazyNamed(() => import('../features/home/pages/HomePage'), 'HomePage');
+const AboutPage = lazyNamed(() => import('../features/about/pages/AboutPage'), 'AboutPage');
+const ProfilePage = lazyNamed(() => import('../features/profile/pages/ProfilePage'), 'ProfilePage');
+const ChatPage = lazyNamed(() => import('../features/chat/pages/ChatPage'), 'ChatPage');
+const CampusPage = lazyNamed(() => import('../features/campus/pages/CampusPage'), 'CampusPage');
+const SupportPage = lazyNamed(() => import('../features/support/pages/SupportPage'), 'SupportPage');
+const CalendarPage = lazyNamed(() => import('../features/planner/pages/CalendarPage'), 'CalendarPage');
+const MaterialsPage = lazyNamed(() => import('../features/materials/pages/MaterialsPage'), 'MaterialsPage');
+const loadLibrary = () => import('../features/library/pages');
+const LibraryProvider = lazyNamed(loadLibrary, 'LibraryProvider');
+const LibraryLayout = lazyNamed(loadLibrary, 'LibraryLayout');
+const LibraryHomePage = lazyNamed(loadLibrary, 'LibraryHomePage');
+const LibraryTopicPage = lazyNamed(loadLibrary, 'LibraryTopicPage');
+const LibraryDocumentPage = lazyNamed(loadLibrary, 'LibraryDocumentPage');
 
 // Один адрес на два состояния: у «О проекте» нет своего URL, поэтому вошедший пользователь
 // попасть на неё не может, а гость не видит главную.

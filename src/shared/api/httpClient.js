@@ -25,6 +25,14 @@ export class ApiError extends Error {
   }
 }
 
+// Файл пришёл короче, чем объявил сервер, — соединение оборвалось на середине.
+export class IncompleteDownloadError extends Error {
+  constructor(expected, received) {
+    super(`Download incomplete: ${received} of ${expected} bytes`);
+    this.name = 'IncompleteDownloadError';
+  }
+}
+
 const buildUrl = (path) => {
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
   if (path.startsWith('/api/')) return path;
@@ -44,7 +52,8 @@ const parseBody = async (response) => {
 
 const performRequest = async (url, options) => {
   const headers = new Headers(options.headers || {});
-  if (options.body && !headers.has('Content-Type')) {
+  // Для FormData заголовок с границей частей multipart ставит сам браузер.
+  if (options.body && !(options.body instanceof FormData) && !headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json');
   }
   if (accessToken && !headers.has('Authorization')) {
@@ -98,7 +107,15 @@ const requestBlob = async (path, options = {}) => {
     throw new ApiError(response.status, body, body?.detail || body?.message);
   }
 
-  return { blob: await response.blob(), contentType: response.headers.get('Content-Type') };
+  const blob = await response.blob();
+  // Content-Length сравним с размером, только если ответ не сжат: у сжатого он считает
+  // сжатые байты, а blob уже распакован.
+  const declared = Number(response.headers.get('Content-Length'));
+  const encoding = response.headers.get('Content-Encoding');
+  if ((!encoding || encoding === 'identity') && declared > 0 && blob.size !== declared) {
+    throw new IncompleteDownloadError(declared, blob.size);
+  }
+  return { blob, contentType: response.headers.get('Content-Type') };
 };
 
 export const httpClient = {

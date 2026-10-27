@@ -1,0 +1,138 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-heading);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.frame:active {
+  cursor: grabbing;
+}
+
+.frame:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+/* Затемнение вокруг круга: остальная часть фото видна, но в аватар не попадёт. */
+.mask {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 0 0 999px rgba(9, 14, 28, 0.6);
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: -1px;
+  pointer-events: none;
+}
+
+.zoom {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zoomButton {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--color-input-bg);
+  color: var(--color-icon-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoomButton:hover:not(:disabled) {
+  background: var(--color-field-border);
+}
+
+.zoomButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.zoomIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.slider {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--color-accent);
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--color-label);
+  text-align: center;
+}
+
+.primary,
+.secondary {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.primary {
+  background: var(--color-navy);
+  color: white;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-primary);
+}
+
+.secondary {
+  background: var(--color-input-bg);
+  color: var(--color-heading);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--color-field-border);
+}
+
+.primary:disabled,
+.secondary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.zoomButton:focus-visible,
+.primary:focus-visible,
+.secondary:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary,
+  .secondary {
+    transition: none;
+  }
+}

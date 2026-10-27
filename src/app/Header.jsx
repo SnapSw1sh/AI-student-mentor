@@ -2,6 +2,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AdminPanelButton } from '../features/auth/components/AdminPanelButton';
 import { useAuth } from '../features/auth/hooks/useAuth';
+import { useAvatarSrc } from '../features/profile/hooks/useAvatarSrc';
 import { AvatarPlaceholderIcon, ChevronDownIcon, CloseIcon, MenuIcon } from '../shared/ui/icons';
 import { Logo } from '../shared/ui/Logo';
 import styles from './Header.module.css';
@@ -62,6 +63,7 @@ function useFittingCount(navRef, measureRef, total, variant) {
 export function Header({ collapsed = false }) {
   const { bootstrapped, isAuthenticated } = useAuth();
   const navLinks = isAuthenticated ? userLinks : guestLinks;
+  const avatarSrc = useAvatarSrc();
   const { pathname } = useLocation();
   const headerRef = useRef(null);
   const menuButtonRef = useRef(null);
@@ -200,7 +202,11 @@ export function Header({ collapsed = false }) {
               <>
                 <AdminPanelButton />
                 <Link to="/profile" className={styles.avatar} aria-label="Профиль">
-                  <AvatarPlaceholderIcon className={styles.avatarIcon} />
+                  {avatarSrc ? (
+                    <img src={avatarSrc} alt="" className={styles.avatarImage} />
+                  ) : (
+                    <AvatarPlaceholderIcon className={styles.avatarIcon} />
+                  )}
                 </Link>
               </>
             ) : (

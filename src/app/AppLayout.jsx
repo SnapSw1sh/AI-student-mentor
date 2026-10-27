@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { ChatProvider } from '../features/chat/context/ChatProvider';
 import { PlannerProvider } from '../features/planner/context/PlannerProvider';
+import { PageLoader } from '../shared/ui/PageLoader';
 import styles from './AppLayout.module.css';
 
 export function AppLayout() {
@@ -22,7 +23,10 @@ export function AppLayout() {
         {bootstrapped && (
           <ChatProvider>
             <PlannerProvider key={user?.user_id ?? 'guest'} userId={user?.user_id}>
-              <Outlet context={outletContext} />
+              {/* Разделы загружаются лениво (routes.jsx) — пока грузится, шапка остаётся на месте. */}
+              <Suspense fallback={<PageLoader />}>
+                <Outlet context={outletContext} />
+              </Suspense>
             </PlannerProvider>
           </ChatProvider>
         )}
